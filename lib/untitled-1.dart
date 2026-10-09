@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// 1. 引入剛剛建立的餐點資料檔案 (路徑請根據你實際的專案名稱調整)
+import 'items_detail.dart';
+
 import 'items.dart'; 
 
 class untitled1 extends StatefulWidget {
@@ -20,6 +21,8 @@ class _untitled1State extends State<untitled1> with TickerProviderStateMixin {
     _tabs = MenuData.categories.keys.toList(); 
     _tabController = TabController(length: _tabs.length, vsync: this);
   }
+
+
 
   @override
   void dispose() {
@@ -60,6 +63,7 @@ class _untitled1State extends State<untitled1> with TickerProviderStateMixin {
               // 💡 改用 InkWell + Padding 取代 ListTile，圖片大、排版更自由
               return InkWell(
                 onTap: () {
+                    showCustomDialog(context, item);
                   // 點擊項目的事件（可留空）
                 },
                 child: Padding(
