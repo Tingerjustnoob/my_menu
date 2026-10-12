@@ -31,4 +31,5 @@ flutter:
 
   assets:
     - web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg
+    - web/icons/item_img/
 

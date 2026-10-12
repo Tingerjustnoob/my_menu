@@ -3,21 +3,20 @@ import 'items_detail.dart';
 
 import 'items.dart'; 
 
-class untitled1 extends StatefulWidget {
-  const untitled1({super.key});
+class Menu extends StatefulWidget {
+  const Menu({super.key});
 
   @override
-  State<untitled1> createState() => _untitled1State();
+  State<Menu> createState() => _MenuState();
 }
 
-class _untitled1State extends State<untitled1> with TickerProviderStateMixin {
+class _MenuState extends State<Menu> with TickerProviderStateMixin {
   late final TabController _tabController;
   late final List<String> _tabs;
 
   @override
   void initState() {
     super.initState();
-    // 2. 直接從 MenuData 類別讀取分類的 Key 清單
     _tabs = MenuData.categories.keys.toList(); 
     _tabController = TabController(length: _tabs.length, vsync: this);
   }
