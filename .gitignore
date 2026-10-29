@@ -11,6 +11,7 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+run.txt
 
 # IntelliJ related
 *.iml
@@ -46,3 +47,13 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Generated Flutter web build files mistakenly placed in the source directory
+/web/.last_build_id
+/web/assets/
+/web/canvaskit/
+/web/main.dart.js
+/web/flutter.js
+/web/flutter_bootstrap.js
+/web/flutter_service_worker.js
+/web/version.json
