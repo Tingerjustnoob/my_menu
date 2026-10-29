@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Untitled-1.dart';
+import 'menu_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const untitled1(),
+      home: const MenuScreen(),
       routes: {
-        '/home': (context) => const untitled1(),
+        '/home': (context) => const MenuScreen(),
       },
     );
   }
