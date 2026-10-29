@@ -7,8 +7,9 @@ void showCustomDialog(BuildContext context, Map<String, dynamic> item) {
       return Dialog(
         // 圓角
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: SizedBox(
+          width: 480,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
