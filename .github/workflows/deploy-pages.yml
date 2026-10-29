@@ -30,6 +30,14 @@ jobs:
       - name: Download dependencies
         run: flutter pub get
 
+      # The repository previously stored a Flutter web build in web/.
+      # Remove only generated files in the runner so source files cannot
+      # override the fresh build placed in build/web/.
+      - name: Remove stale generated web files
+        run: |
+          rm -rf web/assets web/canvaskit
+          rm -f web/main.dart.js web/flutter.js web/flutter_bootstrap.js web/flutter_service_worker.js web/version.json
+
       - name: Build web app
         run: flutter build web --release --base-href "/my_menu/"
 
