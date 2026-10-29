@@ -4,7 +4,10 @@ import 'items_detail.dart';
 import 'items.dart'; 
 
 class MenuScreen extends StatefulWidget {
-  const MenuScreen({super.key});
+  const MenuScreen({super.key, required this.isDarkMode, required this.onToggleTheme});
+
+  final bool isDarkMode;
+  final VoidCallback onToggleTheme;
 
   @override
   State<MenuScreen> createState() => _MenuScreenState();
@@ -34,7 +37,14 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('早餐菜單'),
+        title: const Text('麥香堡菜單'),
+        actions: [
+          IconButton(
+            onPressed: widget.onToggleTheme,
+            tooltip: widget.isDarkMode ? '切換明亮模式' : '切換夜間模式',
+            icon: Icon(widget.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: TabBar(
@@ -72,7 +82,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.center, // 讓內容垂直居中對齊
                     children: [
                       // 1. 左側圖示
-                      const Icon(Icons.fastfood, color: Colors.orange),
+                      const Icon(Icons.fastfood),
                       const SizedBox(width: 12),
                       
                       // 2. 放大後的餐點圖片（加上精緻圓角）
@@ -103,7 +113,6 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                       Text(
                         '\$${item['price']}',
                         style: const TextStyle(
-                          color: Colors.red, 
                           fontSize: 18, 
                           fontWeight: FontWeight.bold
                         ),

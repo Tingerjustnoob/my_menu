@@ -6,7 +6,10 @@ void showCustomDialog(BuildContext context, Map<String, dynamic> item) {
     builder: (BuildContext context) {
       return Dialog(
         // 圓角
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: Theme.of(context).colorScheme.outline),
+        ),
         constraints: const BoxConstraints(maxWidth: 480),
         child: SizedBox(
           width: 480,
@@ -47,7 +50,6 @@ void showCustomDialog(BuildContext context, Map<String, dynamic> item) {
                       '\$${item['price']}',
                       style: const TextStyle(
                         fontSize: 20,
-                        color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
