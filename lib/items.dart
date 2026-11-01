@@ -169,6 +169,13 @@ class MenuData {
         'width': 100,
       },
       {
+        'name': '鮪魚蛋餅',
+        'price': 40,
+        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'height': 100,
+        'width': 100,
+      },
+      {
         'name': '薯餅蛋餅',
         'price': 45,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
@@ -185,7 +192,7 @@ class MenuData {
       },
       {
         'name': '日式涼麵',
-        'price': 40,
+        'price': 50,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
         'height': 100,
         'width': 100,
@@ -206,14 +213,14 @@ class MenuData {
       },
       {
         'name': '蘿蔔糕',
-        'price': 25,
+        'price': 30,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
         'height': 100,
         'width': 100,
       },
       {
         'name': '泡菜蘿蔔糕',
-        'price': 35,
+        'price': 40,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
         'height': 100,
         'width': 100,
