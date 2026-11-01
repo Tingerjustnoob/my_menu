@@ -47,7 +47,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('早餐菜單'),
+        title: const Text('早餐菜單測試'),
         automaticallyImplyLeading: false, 
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50),
