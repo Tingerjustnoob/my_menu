@@ -146,8 +146,8 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
           
           // 上層：絕對定位的「右中半圓形購物車按鈕」
           Positioned(
-            right: 16, 
-            top: 24, 
+            right: 0, 
+            top: MediaQuery.of(context).size.height / 2 - 30, 
             child: Builder(
               builder: (scaffoldContext) {
                 return GestureDetector(
