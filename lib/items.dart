@@ -242,6 +242,7 @@ class MenuData {
       {
         'name': '蔥抓餅',
         'price': 25,
+        'eggPrice': 10,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
         'height': 100,
         'width': 100,

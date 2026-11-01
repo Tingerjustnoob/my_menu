@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void showCustomDialog(BuildContext context, Map<String, dynamic> item) {
+  bool addEgg = false;
+  final int? eggPrice = item['eggPrice'] as int?;
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return Dialog(
+      return StatefulBuilder(builder: (context, setDialogState) => Dialog(
         // 圓角
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -13,6 +15,7 @@ void showCustomDialog(BuildContext context, Map<String, dynamic> item) {
         constraints: const BoxConstraints(maxWidth: 480),
         child: SizedBox(
           width: 480,
+          child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -47,7 +50,7 @@ void showCustomDialog(BuildContext context, Map<String, dynamic> item) {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      '\$${item['price']}',
+                      '\$${(item['price'] as int) + (addEgg ? eggPrice! : 0)}',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -55,11 +58,21 @@ void showCustomDialog(BuildContext context, Map<String, dynamic> item) {
                     ),
                   ],
                 ),
+                if (eggPrice != null)
+                  CheckboxListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text('加蛋 (+\$$eggPrice)'),
+                    value: addEgg,
+                    onChanged: (value) {
+                      setDialogState(() => addEgg = value ?? false);
+                    },
+                  ),
               ],
             ),
           ),
+          ),
         ),
-      );
+      ));
     },
   );
 }
