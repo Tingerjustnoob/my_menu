@@ -36,7 +36,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web
-        run: flutter build web --release --base-href "/my_menu/"
+        run: flutter build web --release --no-tree-shake-icons --base-href "/my_menu/"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
