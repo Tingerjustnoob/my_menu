@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'menu.dart';
+import 'MenuScreen.dart';
 import 'order_sys.dart';
 
 void main() {
@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Menu(),
+      home: const MenuScreen(),
       routes: {
-        '/home': (context) => const Menu(),
+        '/home': (context) => const MenuScreen(),
         '/order_sys': (context) => const OrderSys(),
       },
     );

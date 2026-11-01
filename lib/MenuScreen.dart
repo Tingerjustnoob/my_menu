@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'items_detail.dart';
 import 'items.dart'; 
 
-class Menu extends StatefulWidget {
-  const Menu({super.key});
+class MenuScreen extends StatefulWidget {
+  const MenuScreen({super.key});
 
   @override
-  State<Menu> createState() => _MenuState();
+  State<MenuScreen> createState() => _MenuScreenState();
 }
 
-class _MenuState extends State<Menu> with TickerProviderStateMixin {
+class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   late final TabController _tabController;
   late final List<String> _tabs;
 
