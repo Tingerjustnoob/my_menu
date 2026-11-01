@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'menu.dart';
+import 'order_sys.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       home: const Menu(),
       routes: {
         '/home': (context) => const Menu(),
+        '/order_sys': (context) => const OrderSys(),
       },
     );
   }
