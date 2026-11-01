@@ -47,7 +47,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('早餐菜單v2測試'),
+        title: const Text('早餐菜單'),
         automaticallyImplyLeading: false, 
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50),
@@ -174,7 +174,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                     child: const Material(
                       color: Colors.transparent,
                       child: Icon(
-                        Icons.shopping_cart,
+                        Icons.shopping_basket,
                         color: Colors.white,
                         size: 26,
                       ),
