@@ -46,3 +46,16 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Generated web build output (not web source assets)
+/web/.last_build_id
+/web/assets/
+/web/canvaskit/
+/web/flutter.js
+/web/flutter_bootstrap.js
+/web/flutter_service_worker.js
+/web/main.dart.js
+/web/version.json
+
+# Local C++ build task
+/.vscode/tasks.json
