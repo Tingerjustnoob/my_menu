@@ -182,10 +182,21 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       appBar: AppBar(
         toolbarHeight: isNarrow
             ? MediaQuery.textScalerOf(context).scale(145)
-            : 64,
+            : MediaQuery.textScalerOf(context).scale(100),
         title: Row(
           children: [
-            const Text('麥香堡'),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'web/icons/Icon-192.png',
+                  width: 48,
+                  height: 48,
+                  excludeFromSemantics: true,
+                ),
+                const Text('麥香堡'),
+              ],
+            ),
             const SizedBox(width: 16),
             Expanded(child: contactInfo),
           ],

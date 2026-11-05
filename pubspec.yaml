@@ -21,5 +21,6 @@ flutter:
   uses-material-design: true
 
   assets:
+    - web/icons/Icon-192.png
     - web/icons/item_img/
 

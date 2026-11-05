@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '餐品介紹',
+      title: '麥香堡菜單',
       builder: (context, child) {
         final media = MediaQuery.of(context);
         return MediaQuery(
