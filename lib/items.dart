@@ -159,11 +159,7 @@ class MenuData {
         'price': 45,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
-      {
-        'name': '湯種法國吐司',
-        'price': 35,
-        'image': 'web/icons/item_img/湯種法國吐司.png',
-      },
+      {'name': '湯種法國吐司', 'price': 35, 'image': 'web/icons/item_img/湯種法國吐司.png'},
       {
         'name': '蘿蔔糕',
         'price': 30,
@@ -425,11 +421,7 @@ class MenuData {
         'price': 35,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
-      {
-        'name': '薯餅吐司/漢堡',
-        'price': 30,
-        'image': 'web/icons/item_img/薯餅蛋吐司.png',
-      },
+      {'name': '薯餅吐司/漢堡', 'price': 30, 'image': 'web/icons/item_img/薯餅蛋吐司.png'},
       {
         'name': '歐姆蛋吐司/漢堡',
         'price': 40,
@@ -666,15 +658,11 @@ class MenuData {
     ],
 
     '飲料系列': [
-      {
-        'name': '紅茶（中杯）',
-        'price': 15,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
+      {'name': '紅茶（中杯）', 'price': 15, 'image': 'web/icons/item_img/紅茶.jpg'},
       {
         'name': '紅茶（大杯）',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/紅茶.jpg',
       },
       {
         'name': '豆漿（中杯）',
@@ -689,12 +677,12 @@ class MenuData {
       {
         'name': '奶茶（中杯）',
         'price': 15,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/奶茶.jpg',
       },
       {
         'name': '奶茶（大杯）',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/奶茶.jpg',
       },
       {
         'name': '冰釀綠茶（中杯）',
