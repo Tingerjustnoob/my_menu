@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge})?> showCustomDialog(
+Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge, String? option})?> showCustomDialog(
   BuildContext context,
   Map<String, dynamic> item, {
   int? eggPrice,
@@ -11,6 +11,8 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
   bool addEgg = false;
   bool addCheese = false;
   String? bread;
+  String? selectedOption;
+  final options = item['options'] as List<String>?;
   Map<String, dynamic>? drink;
   int drinkCharge() {
     if (drink == null) return 0;
@@ -18,7 +20,7 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
     if (name == '紅茶（中杯）' || name == '奶茶（中杯）') return 0;
     return (drink!['price'] as int) - 5;
   }
-  return showDialog<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge})>(
+  return showDialog<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge, String? option})>(
     context: context,
     builder: (BuildContext context) {
       return StatefulBuilder(
@@ -112,6 +114,18 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                         }).toList(),
                       ),
                     ],
+                    if (options != null) ...[
+                      const SizedBox(height: 12),
+                      Text(item['optionLabel'] as String),
+                      Wrap(
+                        spacing: 8,
+                        children: options.map((option) => ChoiceChip(
+                          label: Text(option),
+                          selected: selectedOption == option,
+                          onSelected: (_) => setDialogState(() => selectedOption = option),
+                        )).toList(),
+                      ),
+                    ],
                     if (eggPrice != null)
                       CheckboxListTile(
                         contentPadding: EdgeInsets.zero,
@@ -132,9 +146,9 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                       ),
                     const SizedBox(height: 16),
                     FilledButton.icon(
-                      onPressed: (chooseBread && bread == null) || (drinks != null && drink == null) ? null : () =>
+                      onPressed: (chooseBread && bread == null) || (drinks != null && drink == null) || (options != null && selectedOption == null) ? null : () =>
                           Navigator.of(context)
-                              .pop((addEgg: addEgg, addCheese: addCheese, bread: bread, drink: drink?['name'] as String?, drinkCharge: drinkCharge())),
+                              .pop((addEgg: addEgg, addCheese: addCheese, bread: bread, drink: drink?['name'] as String?, drinkCharge: drinkCharge(), option: selectedOption)),
                       icon: const Icon(Icons.add_shopping_cart),
                       label: const Text('加入購物車'),
                     ),

@@ -155,7 +155,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.shopping_cart_outlined));
     await tester.pumpAndSettle();
-    expect(find.text('總金額：\$35'), findsOneWidget);
+    expect(find.text('總金額：\$40'), findsOneWidget);
     expect(find.textContaining('加蛋・單價'), findsOneWidget);
   });
 

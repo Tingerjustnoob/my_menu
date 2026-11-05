@@ -51,7 +51,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       drinks: category == '套餐系列' ? MenuData.categories['飲料系列'] : null,
     );
     if (!mounted || selection == null) return;
-    final name = '${item['name']}${selection.bread == null ? '' : '（${selection.bread}）'}${selection.drink == null ? '' : '（${selection.drink}）'}';
+    final name = '${item['name']}${selection.bread == null ? '' : '（${selection.bread}）'}${selection.drink == null ? '' : '（${selection.drink}）'}${selection.option == null ? '' : '（${selection.option}）'}';
     final price =
         (item['price'] as int) +
         (selection.addEgg ? eggPrice! : 0) +

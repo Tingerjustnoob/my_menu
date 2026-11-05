@@ -181,24 +181,28 @@ class MenuData {
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '鐵板麵（蘑菇/黑胡椒）',
+        'name': '鐵板麵',
         'price': 35,
+        'optionLabel': '請選擇口味',
+        'options': ['蘑菇', '黑胡椒'],
         'image': 'web/icons/item_img/鐵板麵.png',
       },
       {
-        'name': '荷包蛋（全熟/半熟）',
+        'name': '荷包蛋',
         'price': 15,
+        'optionLabel': '請選擇熟度',
+        'options': ['全熟', '半熟'],
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
         'name': '蔥抓餅',
-        'price': 25,
+        'price': 30,
         'eggPrice': 10,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
         'name': '泡菜蔥抓餅',
-        'price': 35,
+        'price': 40,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
@@ -213,7 +217,7 @@ class MenuData {
       },
       {
         'name': '雞絲蛋麵',
-        'price': 40,
+        'price': 45,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
     ],
