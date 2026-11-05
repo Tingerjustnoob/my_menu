@@ -91,10 +91,6 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center, // 讓內容垂直居中對齊
                     children: [
-                      // 1. 左側圖示
-                      const Icon(Icons.fastfood),
-                      const SizedBox(width: 12),
-                      
                       // 2. 放大後的餐點圖片（加上精緻圓角）
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
