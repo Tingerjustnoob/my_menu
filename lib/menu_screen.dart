@@ -38,16 +38,19 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
 
   Future<void> _addToCart(Map<String, dynamic> item, String category) async {
     final hasExtras = MenuData.eggAndCheeseCategories.contains(category);
-    final eggPrice = hasExtras ? 10 : item['eggPrice'] as int?;
-    final cheesePrice = hasExtras ? 10 : null;
+    final eggPrice = hasExtras
+        ? (item['noExtraEgg'] == true ? null : 10)
+        : item['eggPrice'] as int?;
+    final cheesePrice = hasExtras && item['noExtraCheese'] != true ? 10 : null;
     final selection = await showCustomDialog(
       context,
       item,
       eggPrice: eggPrice,
       cheesePrice: cheesePrice,
+      chooseBread: category == '經典麵包系列',
     );
     if (!mounted || selection == null) return;
-    final name = item['name'] as String;
+    final name = '${item['name']}${selection.bread == null ? '' : '（${selection.bread}）'}';
     final price =
         (item['price'] as int) +
         (selection.addEgg ? eggPrice! : 0) +

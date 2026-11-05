@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-Future<({bool addEgg, bool addCheese})?> showCustomDialog(
+Future<({bool addEgg, bool addCheese, String? bread})?> showCustomDialog(
   BuildContext context,
   Map<String, dynamic> item, {
   int? eggPrice,
   int? cheesePrice,
+  bool chooseBread = false,
 }) {
   bool addEgg = false;
   bool addCheese = false;
-  return showDialog<({bool addEgg, bool addCheese})>(
+  String? bread;
+  return showDialog<({bool addEgg, bool addCheese, String? bread})>(
     context: context,
     builder: (BuildContext context) {
       return StatefulBuilder(
@@ -61,6 +63,20 @@ Future<({bool addEgg, bool addCheese})?> showCustomDialog(
                         ),
                       ],
                     ),
+                    if (chooseBread) ...[
+                      const SizedBox(height: 12),
+                      const Text('請選擇麵包種類'),
+                      Wrap(
+                        spacing: 8,
+                        children: ['丹麥麵包', '歐式招牌堡'].map((option) {
+                          return ChoiceChip(
+                            label: Text(option),
+                            selected: bread == option,
+                            onSelected: (_) => setDialogState(() => bread = option),
+                          );
+                        }).toList(),
+                      ),
+                    ],
                     if (eggPrice != null)
                       CheckboxListTile(
                         contentPadding: EdgeInsets.zero,
@@ -81,9 +97,9 @@ Future<({bool addEgg, bool addCheese})?> showCustomDialog(
                       ),
                     const SizedBox(height: 16),
                     FilledButton.icon(
-                      onPressed: () =>
+                      onPressed: chooseBread && bread == null ? null : () =>
                           Navigator.of(context)
-                              .pop((addEgg: addEgg, addCheese: addCheese)),
+                              .pop((addEgg: addEgg, addCheese: addCheese, bread: bread)),
                       icon: const Icon(Icons.add_shopping_cart),
                       label: const Text('加入購物車'),
                     ),

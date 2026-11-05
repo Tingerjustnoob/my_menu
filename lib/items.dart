@@ -209,48 +209,51 @@ class MenuData {
     ],
     '經典麵包系列': [
       {
-        'name': '鮮蔬歐式招牌堡/丹麥漢堡',
+        'name': '鮮蔬',
         'price': 40,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '歐姆蛋歐式招牌堡/丹麥漢堡',
+        'name': '歐姆蛋',
+        'price': 45,
+        'noExtraEgg': true,
+        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+      },
+      {
+        'name': '鮪魚',
         'price': 45,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '鮪魚歐式招牌堡/丹麥漢堡',
-        'price': 45,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '檸檬雞歐式招牌堡/丹麥漢堡',
+        'name': '檸檬雞',
         'price': 50,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '燻雞歐式招牌堡/丹麥漢堡',
+        'name': '燻雞',
         'price': 50,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '培根芝士歐式招牌堡/丹麥漢堡',
+        'name': '培根芝士',
+        'price': 55,
+        'noExtraCheese': true,
+        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+      },
+      {
+        'name': '香烤雞腿',
         'price': 55,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '香烤雞腿歐式招牌堡/丹麥漢堡',
-        'price': 55,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '卡啦雞腿（原/辣）歐式招牌堡/丹麥漢堡',
+        'name': '卡啦雞腿（原/辣）',
         'price': 60,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '超厚牛肉芝士歐式招牌堡/丹麥漢堡',
-        'price': 75,
+        'name': '超厚牛肉芝士',
+        'price': 80,
+        'noExtraCheese': true,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
     ],
@@ -297,7 +300,7 @@ class MenuData {
       },
       {
         'name': '超厚牛肉芝士貝果/丹麥堡',
-        'price': 75,
+        'price': 80,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
     ],
@@ -464,7 +467,7 @@ class MenuData {
       },
       {
         'name': '超厚牛肉芝士吐司/漢堡',
-        'price': 65,
+        'price': 70,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
     ],
@@ -595,11 +598,7 @@ class MenuData {
     ],
 
     '點心系列': [
-      {
-        'name': '四角薯餅',
-        'price': 20,
-        'image': 'web/icons/item_img/四角薯餅.jpg',
-      },
+      {'name': '四角薯餅', 'price': 20, 'image': 'web/icons/item_img/四角薯餅.jpg'},
       {
         'name': '雞優熱狗',
         'price': 15,
@@ -659,101 +658,25 @@ class MenuData {
 
     '飲料系列': [
       {'name': '紅茶（中杯）', 'price': 15, 'image': 'web/icons/item_img/紅茶.jpg'},
-      {
-        'name': '紅茶（大杯）',
-        'price': 20,
-        'image': 'web/icons/item_img/紅茶.jpg',
-      },
-      {
-        'name': '豆漿（中杯）',
-        'price': 15,
-        'image': 'web/icons/item_img/豆漿.jpg',
-      },
-      {
-        'name': '豆漿（大杯）',
-        'price': 20,
-        'image': 'web/icons/item_img/豆漿.jpg',
-      },
-      {
-        'name': '奶茶（中杯）',
-        'price': 15,
-        'image': 'web/icons/item_img/奶茶.jpg',
-      },
-      {
-        'name': '奶茶（大杯）',
-        'price': 20,
-        'image': 'web/icons/item_img/奶茶.jpg',
-      },
-      {
-        'name': '冰釀綠茶（中杯）',
-        'price': 15,
-        'image': 'web/icons/item_img/綠茶.jpg',
-      },
-      {
-        'name': '冰釀綠茶（大杯）',
-        'price': 20,
-        'image': 'web/icons/item_img/綠茶.jpg',
-      },
-      {
-        'name': '咖啡（中杯）',
-        'price': 25,
-        'image': 'web/icons/item_img/咖啡.jpg',
-      },
-      {
-        'name': '咖啡（大杯）',
-        'price': 30,
-        'image': 'web/icons/item_img/咖啡.jpg',
-      },
-      {
-        'name': '可可牛奶（中杯）',
-        'price': 20,
-        'image': 'web/icons/item_img/可可牛奶.jpg',
-      },
-      {
-        'name': '可可牛奶（大杯）',
-        'price': 25,
-        'image': 'web/icons/item_img/可可牛奶.jpg',
-      },
-      {
-        'name': '柳橙汁（中杯）',
-        'price': 20,
-        'image': 'web/icons/item_img/柳橙汁.jpg',
-      },
-      {
-        'name': '柳橙汁（大杯）',
-        'price': 25,
-        'image': 'web/icons/item_img/柳橙汁.jpg',
-      },
-      {
-        'name': '鮮奶茶（中杯）',
-        'price': 25,
-        'image': 'web/icons/item_img/鮮奶茶.jpg',
-      },
-      {
-        'name': '鮮奶茶（大杯）',
-        'price': 30,
-        'image': 'web/icons/item_img/鮮奶茶.jpg',
-      },
-      {
-        'name': '豆漿紅茶（中杯）',
-        'price': 20,
-        'image': 'web/icons/item_img/豆漿紅茶.jpg',
-      },
-      {
-        'name': '豆漿紅茶（大杯）',
-        'price': 25,
-        'image': 'web/icons/item_img/豆漿紅茶.jpg',
-      },
-      {
-        'name': '水果冰茶（中杯）',
-        'price': 25,
-        'image': 'web/icons/item_img/水果冰茶.jpg',
-      },
-      {
-        'name': '水果冰茶（大杯）',
-        'price': 30,
-        'image': 'web/icons/item_img/水果冰茶.jpg',
-      },
+      {'name': '紅茶（大杯）', 'price': 20, 'image': 'web/icons/item_img/紅茶.jpg'},
+      {'name': '豆漿（中杯）', 'price': 15, 'image': 'web/icons/item_img/豆漿.jpg'},
+      {'name': '豆漿（大杯）', 'price': 20, 'image': 'web/icons/item_img/豆漿.jpg'},
+      {'name': '奶茶（中杯）', 'price': 15, 'image': 'web/icons/item_img/奶茶.jpg'},
+      {'name': '奶茶（大杯）', 'price': 20, 'image': 'web/icons/item_img/奶茶.jpg'},
+      {'name': '冰釀綠茶（中杯）', 'price': 15, 'image': 'web/icons/item_img/綠茶.jpg'},
+      {'name': '冰釀綠茶（大杯）', 'price': 20, 'image': 'web/icons/item_img/綠茶.jpg'},
+      {'name': '咖啡（中杯）', 'price': 25, 'image': 'web/icons/item_img/咖啡.jpg'},
+      {'name': '咖啡（大杯）', 'price': 30, 'image': 'web/icons/item_img/咖啡.jpg'},
+      {'name': '可可牛奶（中杯）', 'price': 20, 'image': 'web/icons/item_img/可可牛奶.jpg'},
+      {'name': '可可牛奶（大杯）', 'price': 25, 'image': 'web/icons/item_img/可可牛奶.jpg'},
+      {'name': '柳橙汁（中杯）', 'price': 20, 'image': 'web/icons/item_img/柳橙汁.jpg'},
+      {'name': '柳橙汁（大杯）', 'price': 25, 'image': 'web/icons/item_img/柳橙汁.jpg'},
+      {'name': '鮮奶茶（中杯）', 'price': 25, 'image': 'web/icons/item_img/鮮奶茶.jpg'},
+      {'name': '鮮奶茶（大杯）', 'price': 30, 'image': 'web/icons/item_img/鮮奶茶.jpg'},
+      {'name': '豆漿紅茶（中杯）', 'price': 20, 'image': 'web/icons/item_img/豆漿紅茶.jpg'},
+      {'name': '豆漿紅茶（大杯）', 'price': 25, 'image': 'web/icons/item_img/豆漿紅茶.jpg'},
+      {'name': '水果冰茶（中杯）', 'price': 25, 'image': 'web/icons/item_img/水果冰茶.jpg'},
+      {'name': '水果冰茶（大杯）', 'price': 30, 'image': 'web/icons/item_img/水果冰茶.jpg'},
     ],
   };
 }
