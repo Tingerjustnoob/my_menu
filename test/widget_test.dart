@@ -106,11 +106,15 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('紅茶（中杯）（+\$0）').last);
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('冰'));
+    await tester.tap(find.text('冰'));
+    await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('加入購物車'));
     await tester.tap(find.text('加入購物車'));
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.shopping_cart_outlined));
     await tester.pumpAndSettle();
+    expect(find.text('兒童套餐 A（紅茶（中杯）・冰）'), findsOneWidget);
     expect(find.text('總金額：\$65'), findsOneWidget);
     await tester.tap(find.byIcon(Icons.add_circle_outline));
     await tester.pumpAndSettle();

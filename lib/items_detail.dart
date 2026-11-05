@@ -1,26 +1,82 @@
 import 'package:flutter/material.dart';
 
-Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge, String? option})?> showCustomDialog(
+Future<
+  ({
+    bool addEgg,
+    bool addCheese,
+    String? bread,
+    String? drink,
+    int drinkCharge,
+    String? option,
+    int optionCharge,
+    String? temperature,
+  })?
+>
+showCustomDialog(
   BuildContext context,
   Map<String, dynamic> item, {
   int? eggPrice,
   int? cheesePrice,
   List<String>? breadOptions,
   List<Map<String, dynamic>>? drinks,
+  List<String>? choices,
+  String? choiceLabel,
+  Map<String, int>? choicePrices,
+  bool standaloneDrink = false,
 }) {
   bool addEgg = false;
   bool addCheese = false;
   String? bread;
   String? selectedOption;
-  final options = item['options'] as List<String>?;
+  final options = choices ?? item['options'] as List<String>?;
+  int optionCharge() => selectedOption == null || choicePrices == null
+      ? 0
+      : choicePrices[selectedOption]! - (item['price'] as int);
   Map<String, dynamic>? drink;
+  String? drinkTemperature;
+  Widget choiceButton(String label, bool selected, VoidCallback onPressed) {
+    return Builder(
+      builder: (context) {
+        final colors = Theme.of(context).colorScheme;
+        return Semantics(
+          selected: selected,
+          child: OutlinedButton(
+            onPressed: onPressed,
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(0, 36),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              backgroundColor: selected ? colors.primaryContainer : null,
+              foregroundColor: selected
+                  ? colors.onPrimaryContainer
+                  : colors.onSurface,
+            ),
+            child: Text(label, textAlign: TextAlign.center),
+          ),
+        );
+      },
+    );
+  }
+
   int drinkCharge() {
     if (drink == null) return 0;
     final name = drink!['name'] as String;
     if (name == '紅茶（中杯）' || name == '奶茶（中杯）') return 0;
     return (drink!['price'] as int) - 5;
   }
-  return showDialog<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge, String? option})>(
+
+  return showDialog<
+    ({
+      bool addEgg,
+      bool addCheese,
+      String? bread,
+      String? drink,
+      int drinkCharge,
+      String? option,
+      int optionCharge,
+      String? temperature,
+    })
+  >(
     context: context,
     builder: (BuildContext context) {
       return StatefulBuilder(
@@ -65,7 +121,7 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                         ),
                         const SizedBox(width: 16),
                         Text(
-                          '\$${(item['price'] as int) + (addEgg ? eggPrice! : 0) + (addCheese ? cheesePrice! : 0) + drinkCharge()}',
+                          '\$${(item['price'] as int) + (addEgg ? eggPrice! : 0) + (addCheese ? cheesePrice! : 0) + drinkCharge() + optionCharge()}',
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -91,13 +147,49 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                         items: drinks.map((option) {
                           final name = option['name'] as String;
                           final charge = name == '紅茶（中杯）' || name == '奶茶（中杯）'
-                              ? 0 : (option['price'] as int) - 5;
+                              ? 0
+                              : (option['price'] as int) - 5;
                           return DropdownMenuItem(
                             value: option,
                             child: Text('$name（+\$$charge）'),
                           );
                         }).toList(),
-                        onChanged: (value) => setDialogState(() => drink = value),
+                        onChanged: (value) => setDialogState(() {
+                          drink = value;
+                          drinkTemperature = null;
+                        }),
+                      ),
+                    ],
+                    if (standaloneDrink || drink != null) ...[
+                      const SizedBox(height: 12),
+                      const Text('請選擇溫度'),
+                      Wrap(
+                        spacing: 8,
+                        children:
+                            ((standaloneDrink
+                                                ? item['name'] as String
+                                                : drink!['name'] as String)
+                                            .startsWith('冰釀綠茶') ||
+                                        (standaloneDrink
+                                                ? item['name'] as String
+                                                : drink!['name'] as String)
+                                            .startsWith('柳橙汁') ||
+                                        (standaloneDrink
+                                                ? item['name'] as String
+                                                : drink!['name'] as String)
+                                            .startsWith('水果冰茶')
+                                    ? ['冰']
+                                    : ['冰', '溫'])
+                                .map((temperature) {
+                                  return choiceButton(
+                                    temperature,
+                                    drinkTemperature == temperature,
+                                    () => setDialogState(
+                                      () => drinkTemperature = temperature,
+                                    ),
+                                  );
+                                })
+                                .toList(),
                       ),
                     ],
                     if (breadOptions != null) ...[
@@ -106,24 +198,32 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                       Wrap(
                         spacing: 8,
                         children: breadOptions.map((option) {
-                          return ChoiceChip(
-                            label: Text(option),
-                            selected: bread == option,
-                            onSelected: (_) => setDialogState(() => bread = option),
+                          return choiceButton(
+                            option,
+                            bread == option,
+                            () => setDialogState(() => bread = option),
                           );
                         }).toList(),
                       ),
                     ],
                     if (options != null) ...[
                       const SizedBox(height: 12),
-                      Text(item['optionLabel'] as String),
+                      Text(choiceLabel ?? item['optionLabel'] as String),
                       Wrap(
                         spacing: 8,
-                        children: options.map((option) => ChoiceChip(
-                          label: Text(option),
-                          selected: selectedOption == option,
-                          onSelected: (_) => setDialogState(() => selectedOption = option),
-                        )).toList(),
+                        children: options
+                            .map(
+                              (option) => choiceButton(
+                                choicePrices == null
+                                    ? option
+                                    : '$option (\$${choicePrices[option]})',
+                                selectedOption == option,
+                                () => setDialogState(
+                                  () => selectedOption = option,
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ],
                     if (eggPrice != null)
@@ -146,9 +246,28 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                       ),
                     const SizedBox(height: 16),
                     FilledButton.icon(
-                      onPressed: (breadOptions != null && bread == null) || (drinks != null && drink == null) || (options != null && selectedOption == null) ? null : () =>
-                          Navigator.of(context)
-                              .pop((addEgg: addEgg, addCheese: addCheese, bread: bread, drink: drink?['name'] as String?, drinkCharge: drinkCharge(), option: selectedOption)),
+                      onPressed:
+                          (breadOptions != null && bread == null) ||
+                              (drinks != null &&
+                                  (drink == null ||
+                                      drinkTemperature == null)) ||
+                              (standaloneDrink && drinkTemperature == null) ||
+                              (options != null && selectedOption == null)
+                          ? null
+                          : () => Navigator.of(context).pop((
+                              addEgg: addEgg,
+                              addCheese: addCheese,
+                              bread: bread,
+                              drink: drink == null
+                                  ? null
+                                  : '${drink!['name']}・$drinkTemperature',
+                              drinkCharge: drinkCharge(),
+                              option: selectedOption,
+                              optionCharge: optionCharge(),
+                              temperature: standaloneDrink
+                                  ? drinkTemperature
+                                  : null,
+                            )),
                       icon: const Icon(Icons.add_shopping_cart),
                       label: const Text('加入購物車'),
                     ),

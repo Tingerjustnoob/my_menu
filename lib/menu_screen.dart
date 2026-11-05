@@ -49,17 +49,40 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       cheesePrice: cheesePrice,
       breadOptions: switch (category) {
         '經典麵包／貝果系列' => ['歐式招牌堡', '丹麥漢堡', '貝果'],
+        '漢堡／湯種吐司系列' => ['漢堡', '湯種吐司'],
         _ => null,
       },
-      drinks: category == '套餐系列' ? MenuData.categories['飲料系列'] : null,
+      drinks: category == '套餐系列' || category == '早午餐系列'
+          ? MenuData.categories['飲料系列']
+          : null,
+      choices: switch (category) {
+        '烤土司系列' => ['薄片', '湯種厚片', '貝果'],
+        '蔬菜沙拉系列' => ['和風醬', '千島醬', '優格醬', '蜂蜜芥末醬'],
+        '飲料系列' => ['中杯', '大杯'],
+        _ => null,
+      },
+      choiceLabel: switch (category) {
+        '烤土司系列' => '請選擇種類',
+        '蔬菜沙拉系列' => '請選擇醬料',
+        '飲料系列' => '請選擇大小',
+        _ => null,
+      },
+      choicePrices: switch (category) {
+        '烤土司系列' => {'薄片': 15, '湯種厚片': 20, '貝果': 30},
+        '飲料系列' => {'中杯': item['price'] as int, '大杯': item['largePrice'] as int},
+        _ => null,
+      },
+      standaloneDrink: category == '飲料系列',
     );
     if (!mounted || selection == null) return;
-    final name = '${item['name']}${selection.bread == null ? '' : '（${selection.bread}）'}${selection.drink == null ? '' : '（${selection.drink}）'}${selection.option == null ? '' : '（${selection.option}）'}';
+    final name =
+        '${item['name']}${selection.bread == null ? '' : '（${selection.bread}）'}${selection.drink == null ? '' : '（${selection.drink}）'}${selection.option == null ? '' : '（${selection.option}）'}${selection.temperature == null ? '' : '（${selection.temperature}）'}';
     final price =
         (item['price'] as int) +
         (selection.addEgg ? eggPrice! : 0) +
         (selection.addCheese ? cheesePrice! : 0) +
-        selection.drinkCharge;
+        selection.drinkCharge +
+        selection.optionCharge;
     setState(() {
       final index = _cart.indexWhere(
         (entry) =>
@@ -144,7 +167,11 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                 'data=!4m6!3m5!1s0x346ebf52f6225ba1:0xf4c925ae58323615'
                 '!8m2!3d23.5587745!4d120.4696578!16s%2Fg%2F11tbk35z4c'
                 '?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D';
-            _openBrowserWindow(url.toJS, '_blank'.toJS, 'noopener,noreferrer'.toJS);
+            _openBrowserWindow(
+              url.toJS,
+              '_blank'.toJS,
+              'noopener,noreferrer'.toJS,
+            );
           },
           child: Text(
             '地址：$_address',
@@ -225,7 +252,28 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: _tabs.map((category) {
-                final items = MenuData.categories[category] ?? [];
+                final categoryItems = MenuData.categories[category] ?? [];
+                final items = category == '飲料系列'
+                    ? categoryItems
+                          .where(
+                            (item) => (item['name'] as String).endsWith('（中杯）'),
+                          )
+                          .map((item) {
+                            final name = (item['name'] as String).replaceFirst(
+                              '（中杯）',
+                              '',
+                            );
+                            final large = categoryItems.firstWhere(
+                              (entry) => entry['name'] == '$name（大杯）',
+                            );
+                            return {
+                              ...item,
+                              'name': name,
+                              'largePrice': large['price'],
+                            };
+                          })
+                          .toList()
+                    : categoryItems;
                 final note = MenuData.categoryNotes[category];
 
                 if (items.isEmpty) {
@@ -280,7 +328,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                             const SizedBox(width: 16),
 
                             Text(
-                              '\$${item['price']}',
+                              '\$${item['price']}${category == '烤土司系列' || category == '飲料系列' ? ' 起' : ''}',
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
