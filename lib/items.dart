@@ -598,7 +598,7 @@ class MenuData {
       {
         'name': '四角薯餅',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/四角薯餅.jpg',
       },
       {
         'name': '雞優熱狗',
@@ -667,12 +667,12 @@ class MenuData {
       {
         'name': '豆漿（中杯）',
         'price': 15,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/豆漿.jpg',
       },
       {
         'name': '豆漿（大杯）',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/豆漿.jpg',
       },
       {
         'name': '奶茶（中杯）',
@@ -687,72 +687,72 @@ class MenuData {
       {
         'name': '冰釀綠茶（中杯）',
         'price': 15,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/綠茶.jpg',
       },
       {
         'name': '冰釀綠茶（大杯）',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/綠茶.jpg',
       },
       {
         'name': '咖啡（中杯）',
         'price': 25,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/咖啡.jpg',
       },
       {
         'name': '咖啡（大杯）',
         'price': 30,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/咖啡.jpg',
       },
       {
         'name': '可可牛奶（中杯）',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/可可牛奶.jpg',
       },
       {
         'name': '可可牛奶（大杯）',
         'price': 25,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/可可牛奶.jpg',
       },
       {
         'name': '柳橙汁（中杯）',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/柳橙汁.jpg',
       },
       {
         'name': '柳橙汁（大杯）',
         'price': 25,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/柳橙汁.jpg',
       },
       {
         'name': '鮮奶茶（中杯）',
         'price': 25,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/鮮奶茶.jpg',
       },
       {
         'name': '鮮奶茶（大杯）',
         'price': 30,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/鮮奶茶.jpg',
       },
       {
         'name': '豆漿紅茶（中杯）',
         'price': 20,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/豆漿紅茶.jpg',
       },
       {
         'name': '豆漿紅茶（大杯）',
         'price': 25,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/豆漿紅茶.jpg',
       },
       {
         'name': '水果冰茶（中杯）',
         'price': 25,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/水果冰茶.jpg',
       },
       {
         'name': '水果冰茶（大杯）',
         'price': 30,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/水果冰茶.jpg',
       },
     ],
   };
