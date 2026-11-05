@@ -1,6 +1,13 @@
 // lib/data/menu_data.dart
 
 class MenuData {
+  static const Set<String> eggAndCheeseCategories = {
+    '經典麵包系列',
+    '貝果系列',
+    '捲餅系列',
+    '漢堡／湯種吐司系列',
+  };
+
   static const Map<String, String> categoryNotes = {
     '套餐系列': '套餐均附中杯飲料，飲料另選折抵 5 元。',
     '早午餐系列': '早午餐均附中杯飲料，飲料另選折抵 5 元。',

@@ -24,21 +24,39 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   late final List<String> _tabs;
   final List<CartItem> _cart = [];
 
-  Future<void> _addToCart(Map<String, dynamic> item) async {
-    final addEgg = await showCustomDialog(context, item);
-    if (!mounted || addEgg == null) return;
+  Future<void> _addToCart(Map<String, dynamic> item, String category) async {
+    final hasExtras = MenuData.eggAndCheeseCategories.contains(category);
+    final eggPrice = hasExtras ? 10 : item['eggPrice'] as int?;
+    final cheesePrice = hasExtras ? 10 : null;
+    final selection = await showCustomDialog(
+      context,
+      item,
+      eggPrice: eggPrice,
+      cheesePrice: cheesePrice,
+    );
+    if (!mounted || selection == null) return;
     final name = item['name'] as String;
     final price =
-        (item['price'] as int) + (addEgg ? (item['eggPrice'] as int) : 0);
+        (item['price'] as int) +
+        (selection.addEgg ? eggPrice! : 0) +
+        (selection.addCheese ? cheesePrice! : 0);
     setState(() {
       final index = _cart.indexWhere(
         (entry) =>
             entry.name == name &&
-            entry.addEgg == addEgg &&
+            entry.addEgg == selection.addEgg &&
+            entry.addCheese == selection.addCheese &&
             entry.unitPrice == price,
       );
       if (index == -1) {
-        _cart.add(CartItem(name: name, unitPrice: price, addEgg: addEgg));
+        _cart.add(
+          CartItem(
+            name: name,
+            unitPrice: price,
+            addEgg: selection.addEgg,
+            addCheese: selection.addCheese,
+          ),
+        );
       } else {
         _cart[index].quantity++;
       }
@@ -49,6 +67,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   }
 
   Future<void> _openCart() async {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     await Navigator.of(
       context,
     ).push(MaterialPageRoute<void>(builder: (_) => CartScreen(items: _cart)));
@@ -120,7 +139,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
               final item = items[index - (note == null ? 0 : 1)];
 
               return InkWell(
-                onTap: () => _addToCart(item),
+                onTap: () => _addToCart(item, category),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,

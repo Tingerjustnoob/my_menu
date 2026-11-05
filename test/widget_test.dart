@@ -85,10 +85,12 @@ void main() {
     await tester.scrollUntilVisible(
       find.text('蔥抓餅'),
       400,
-      scrollable: find.descendant(
-        of: find.byType(ListView).first,
-        matching: find.byType(Scrollable),
-      ).first,
+      scrollable: find
+          .descendant(
+            of: find.byType(ListView).first,
+            matching: find.byType(Scrollable),
+          )
+          .first,
     );
     await tester.ensureVisible(find.text('蔥抓餅'));
     await tester.pumpAndSettle();
@@ -102,5 +104,28 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('總金額：\$35'), findsOneWidget);
     expect(find.textContaining('加蛋・單價'), findsOneWidget);
+  });
+
+  testWidgets('麵包餐點可同時加蛋及芝士，並記錄在明細', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    await tester.tap(find.text('經典麵包系列'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('鮮蔬歐式招牌堡/丹麥漢堡'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('加蛋 (+\$10)'));
+    await tester.tap(find.text('加蛋 (+\$10)'));
+    await tester.ensureVisible(find.text('加芝士 (+\$10)'));
+    await tester.tap(find.text('加芝士 (+\$10)'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('加入購物車'));
+    await tester.tap(find.text('加入購物車'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.shopping_cart_outlined));
+    await tester.pumpAndSettle();
+    expect(find.text('總金額：\$60'), findsOneWidget);
+    expect(find.text('加蛋、加芝士・單價 \$60'), findsOneWidget);
+    await tester.tap(find.text('查看餐點明細'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('（加蛋、加芝士）'), findsOneWidget);
   });
 }

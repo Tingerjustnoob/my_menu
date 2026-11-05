@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CartItem {
-  CartItem({required this.name, required this.unitPrice, required this.addEgg});
+  CartItem({
+    required this.name,
+    required this.unitPrice,
+    required this.addEgg,
+    required this.addCheese,
+  });
 
   final String name;
   final int unitPrice;
   final bool addEgg;
+  final bool addCheese;
+  String get extras => [if (addEgg) '加蛋', if (addCheese) '加芝士'].join('、');
   int quantity = 1;
 }
 
@@ -38,7 +45,7 @@ class _CartScreenState extends State<CartScreen> {
                       return ListTile(
                         title: Text(item.name),
                         subtitle: Text(
-                          '${item.addEgg ? '加蛋・' : ''}單價 \$${item.unitPrice}',
+                          '${item.extras.isNotEmpty ? '${item.extras}・' : ''}單價 \$${item.unitPrice}',
                         ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -82,7 +89,7 @@ class _CartScreenState extends State<CartScreen> {
                             final summary = widget.items
                                 .map(
                                   (item) =>
-                                      '${item.name}${item.addEgg ? '（加蛋）' : ''} × ${item.quantity}　\$${item.unitPrice * item.quantity}',
+                                      '${item.name}${item.extras.isNotEmpty ? '（${item.extras}）' : ''} × ${item.quantity}　\$${item.unitPrice * item.quantity}',
                                 )
                                 .toList();
                             final total = _total;

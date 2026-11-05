@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-Future<bool?> showCustomDialog(
+Future<({bool addEgg, bool addCheese})?> showCustomDialog(
   BuildContext context,
-  Map<String, dynamic> item,
-) {
+  Map<String, dynamic> item, {
+  int? eggPrice,
+  int? cheesePrice,
+}) {
   bool addEgg = false;
-  final int? eggPrice = item['eggPrice'] as int?;
-  return showDialog<bool>(
+  bool addCheese = false;
+  return showDialog<({bool addEgg, bool addCheese})>(
     context: context,
     builder: (BuildContext context) {
       return StatefulBuilder(
@@ -51,7 +53,7 @@ Future<bool?> showCustomDialog(
                         ),
                         const SizedBox(width: 16),
                         Text(
-                          '\$${(item['price'] as int) + (addEgg ? eggPrice! : 0)}',
+                          '\$${(item['price'] as int) + (addEgg ? eggPrice! : 0) + (addCheese ? cheesePrice! : 0)}',
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -68,9 +70,20 @@ Future<bool?> showCustomDialog(
                           setDialogState(() => addEgg = value ?? false);
                         },
                       ),
+                    if (cheesePrice != null)
+                      CheckboxListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text('加芝士 (+\$$cheesePrice)'),
+                        value: addCheese,
+                        onChanged: (value) {
+                          setDialogState(() => addCheese = value ?? false);
+                        },
+                      ),
                     const SizedBox(height: 16),
                     FilledButton.icon(
-                      onPressed: () => Navigator.of(context).pop(addEgg),
+                      onPressed: () =>
+                          Navigator.of(context)
+                              .pop((addEgg: addEgg, addCheese: addCheese)),
                       icon: const Icon(Icons.add_shopping_cart),
                       label: const Text('加入購物車'),
                     ),
