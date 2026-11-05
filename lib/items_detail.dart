@@ -51,7 +51,11 @@ showCustomDialog(
                   ? colors.onPrimaryContainer
                   : colors.onSurface,
             ),
-            child: Text(label, textAlign: TextAlign.center),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
         );
       },
@@ -144,6 +148,10 @@ showCustomDialog(
                       const SizedBox(height: 12),
                       DropdownButtonFormField<Map<String, dynamic>>(
                         isExpanded: true,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                         decoration: const InputDecoration(labelText: '請選擇飲料'),
                         items: drinks.map((option) {
                           final name = option['name'] as String;
@@ -268,7 +276,10 @@ showCustomDialog(
                                   : null,
                             )),
                       icon: const Icon(Icons.add_shopping_cart),
-                      label: const Text('加入購物車'),
+                      label: const Text(
+                        '加入購物車',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
