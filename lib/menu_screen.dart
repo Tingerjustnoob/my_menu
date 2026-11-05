@@ -80,6 +80,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
             entry.name == name &&
             entry.addEgg == selection.addEgg &&
             entry.addCheese == selection.addCheese &&
+            entry.isDrink == (category == '飲料系列') &&
             entry.unitPrice == price,
       );
       if (index == -1) {
@@ -89,6 +90,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
             unitPrice: price,
             addEgg: selection.addEgg,
             addCheese: selection.addCheese,
+            isDrink: category == '飲料系列',
           ),
         );
       } else {

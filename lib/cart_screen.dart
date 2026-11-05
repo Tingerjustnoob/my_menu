@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'store_contact.dart';
 
@@ -8,12 +9,14 @@ class CartItem {
     required this.unitPrice,
     required this.addEgg,
     required this.addCheese,
+    required this.isDrink,
   });
 
   final String name;
   final int unitPrice;
   final bool addEgg;
   final bool addCheese;
+  final bool isDrink;
   String get extras => [if (addEgg) '加蛋', if (addCheese) '加芝士'].join('、');
   int quantity = 1;
 }
@@ -104,11 +107,20 @@ class _CartScreenState extends State<CartScreen> {
                                 )
                                 .toList();
                             final total = _total;
+                            final spokenLines = widget.items.map((item) {
+                              final name = item.name
+                                  .replaceAll(RegExp(r'[（）()]'), ' ')
+                                  .replaceAll('・', ' ')
+                                  .replaceAll(RegExp(r'\s+'), ' ')
+                                  .trim();
+                              return '${item.quantity} ${item.isDrink ? '杯' : '份'} $name${item.extras.isEmpty ? '' : '，${item.extras}'}';
+                            }).toList();
                             Navigator.of(context).push(
                               MaterialPageRoute<void>(
                                 builder: (_) => OrderSummaryScreen(
                                   lines: summary,
                                   total: total,
+                                  spokenLines: spokenLines,
                                 ),
                               ),
                             );
@@ -130,13 +142,16 @@ class OrderSummaryScreen extends StatelessWidget {
     super.key,
     required this.lines,
     required this.total,
+    required this.spokenLines,
   });
 
   final List<String> lines;
   final int total;
+  final List<String> spokenLines;
 
   @override
   Widget build(BuildContext context) {
+    final orderText = '您好，我想要訂餐。\n${spokenLines.join('，\n')}。\n謝謝。';
     return Scaffold(
       appBar: AppBar(title: const Text('餐點明細')),
       body: ListView(
@@ -153,7 +168,44 @@ class OrderSummaryScreen extends StatelessWidget {
           const Text('此畫面僅供確認，不會付款或送出訂單。'),
           const SizedBox(height: 16),
           FilledButton.icon(
-            onPressed: callStore,
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (dialogContext) => AlertDialog(
+                  content: SingleChildScrollView(
+                    child: SelectableText(
+                      orderText,
+                      style: Theme.of(dialogContext).textTheme.bodyLarge,
+                    ),
+                  ),
+                  actions: [
+                    TextButton.icon(
+                      onPressed: () async {
+                        try {
+                          await Clipboard.setData(ClipboardData(text: orderText));
+                          if (!dialogContext.mounted) return;
+                          ScaffoldMessenger.of(dialogContext).showSnackBar(
+                            const SnackBar(content: Text('已複製訂餐內容')),
+                          );
+                        } catch (_) {
+                          if (!dialogContext.mounted) return;
+                          ScaffoldMessenger.of(dialogContext).showSnackBar(
+                            const SnackBar(content: Text('無法複製，請手動選取文字')),
+                          );
+                        }
+                      },
+                      icon: const Icon(Icons.copy),
+                      label: const Text('複製'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(dialogContext).pop(),
+                      child: const Text('關閉'),
+                    ),
+                  ],
+                ),
+              );
+              callStore();
+            },
             icon: const Icon(Icons.phone),
             label: const Text('打電話訂餐'),
           ),
