@@ -1,6 +1,15 @@
 // lib/data/menu_data.dart
 
 class MenuData {
+  static const Map<String, String> categoryNotes = {
+    '套餐系列': '套餐均附中杯飲料，飲料另選折抵 5 元。',
+    '早午餐系列': '早午餐均附中杯飲料，飲料另選折抵 5 元。',
+    '經典麵包系列': '加蛋或加芝士另加 10 元。',
+    '貝果系列': '加蛋或加芝士另加 10 元。',
+    '捲餅系列': '加蛋或加芝士另加 10 元。',
+    '漢堡／湯種吐司系列': '加蛋或加芝士另加 10 元。',
+  };
+
   // 將餐點資料宣告為 static final，讓其他檔案可以直接讀取，不需重複實例化
   static final Map<String, List<Map<String, dynamic>>> categories = {
     '套餐系列': [

@@ -59,6 +59,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
         children: _tabs.map((category) {
           // 3. 根據目前的分類，從 MenuData 抓取對應的餐點清單
           final items = MenuData.categories[category] ?? [];
+          final note = MenuData.categoryNotes[category];
           imageCache.clear(); // 清除圖片快取，避免重複加載舊圖片
 
           if (items.isEmpty) {
@@ -66,9 +67,18 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
           }
 
           return ListView.builder(
-            itemCount: items.length,
+            itemCount: items.length + (note == null ? 0 : 1),
             itemBuilder: (context, index) {
-              final item = items[index];
+              if (note != null && index == 0) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                  child: Text(
+                    '備註：$note',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                );
+              }
+              final item = items[index - (note == null ? 0 : 1)];
               
               // 💡 改用 InkWell + Padding 取代 ListTile，圖片大、排版更自由
               return InkWell(

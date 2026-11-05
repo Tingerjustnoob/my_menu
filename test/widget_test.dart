@@ -7,6 +7,10 @@ void main() {
     await tester.pumpWidget(const MyApp());
     expect(find.text('麥香堡菜單'), findsOneWidget);
     expect(find.text('套餐系列'), findsOneWidget);
+    expect(find.text('備註：套餐均附中杯飲料，飲料另選折抵 5 元。'), findsOneWidget);
+    await tester.tap(find.text('中式餐點'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('備註：'), findsNothing);
   });
 
   testWidgets('可以切換明亮與夜間模式', (tester) async {
