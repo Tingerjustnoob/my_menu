@@ -121,9 +121,19 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('訂餐方式說明'),
-          content: const Text(
-            '您可以將想吃的餐點加入購物車，查看餐點明細與總金額。'
-            '本網站無法線上結帳或送出訂單，請撥打 05-272-3486 電話訂餐。',
+          content: const SingleChildScrollView(
+            child: Text(
+              '您可以將想吃的餐點加入購物車，查看餐點明細與總金額。'
+              '本網站無法線上結帳或送出訂單，請撥打 05-272-3486 電話訂餐。\n\n'
+              '營業時間：\n'
+              '星期一：06:00～14:00\n'
+              '星期二：06:00～14:00\n'
+              '星期三：休息\n'
+              '星期四：06:00～14:00\n'
+              '星期五：06:00～14:00\n'
+              '星期六：06:00～14:00\n'
+              '星期日：06:00～14:00',
+            ),
           ),
           actions: [
             TextButton(
@@ -242,6 +252,27 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Center(
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 8,
+              children: [
+                for (final social in [
+                  (name: 'Facebook', icon: Icons.facebook),
+                  (name: 'Instagram', icon: Icons.camera_alt_outlined),
+                  (name: 'LINE', icon: Icons.chat_bubble_outline),
+                ])
+                  Tooltip(
+                    message: '${social.name} 尚未設定連結',
+                    child: OutlinedButton.icon(
+                      onPressed: null,
+                      icon: Icon(social.icon),
+                      label: Text(social.name),
+                    ),
+                  ),
+              ],
+            ),
+          ),
           TabBar(
             controller: _tabController,
             isScrollable: true,

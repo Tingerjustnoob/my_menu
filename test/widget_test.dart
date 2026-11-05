@@ -8,6 +8,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('訂餐方式說明'), findsOneWidget);
     expect(find.textContaining('無法線上結帳或送出訂單'), findsOneWidget);
+    expect(find.textContaining('星期三：休息'), findsOneWidget);
     await tester.tap(find.text('我知道了'));
     await tester.pumpAndSettle();
   }
