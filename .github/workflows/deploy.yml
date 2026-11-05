@@ -1,11 +1,10 @@
 
-name: Deploy Flutter Web (main and preview)
+name: Deploy Flutter Web
 
 on:
   push:
     branches:
       - main
-      - feature-cart
   workflow_dispatch:
 
 permissions:
@@ -27,15 +26,6 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
-        with:
-          ref: main
-          path: main-source
-
-      - name: Checkout feature-cart
-        uses: actions/checkout@v4
-        with:
-          ref: feature-cart
-          path: preview-source
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -43,23 +33,9 @@ jobs:
           channel: stable
 
       - name: Build main site
-        working-directory: main-source
         run: |
           flutter pub get
           flutter build web --release --no-tree-shake-icons --base-href "/my_menu/"
-
-      - name: Build preview site
-        working-directory: preview-source
-        run: |
-          flutter pub get
-          flutter build web --release --no-tree-shake-icons --base-href "/my_menu/preview/"
-
-      - name: Combine sites
-        run: |
-          mkdir -p site
-          cp -a main-source/build/web/. site/
-          mkdir -p site/preview
-          cp -a preview-source/build/web/. site/preview/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -67,7 +43,7 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: site
+          path: build/web
 
       - name: Deploy website
         id: deployment
