@@ -1,30 +1,42 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:e_commerce/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:e_commerce/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('顯示菜單標題與套餐分類', (tester) async {
     await tester.pumpWidget(const MyApp());
+    expect(find.text('麥香堡菜單'), findsOneWidget);
+    expect(find.text('套餐'), findsOneWidget);
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('可以切換明亮與夜間模式', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    await tester.tap(find.byTooltip('切換夜間模式'));
+    await tester.pumpAndSettle();
+    expect(find.byTooltip('切換明亮模式'), findsOneWidget);
+    expect(Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+        Brightness.dark);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.tap(find.byTooltip('切換明亮模式'));
+    await tester.pumpAndSettle();
+    expect(find.byTooltip('切換夜間模式'), findsOneWidget);
+    expect(Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+        Brightness.light);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('點擊餐點後顯示詳情', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    await tester.tap(find.textContaining('兒童套餐 A').first);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(Dialog), findsOneWidget);
+    expect(find.descendant(
+      of: find.byType(Dialog),
+      matching: find.textContaining('兒童套餐 A'),
+    ), findsOneWidget);
+    expect(find.descendant(
+      of: find.byType(Dialog),
+      matching: find.text(r'$65'),
+    ), findsOneWidget);
   });
 }
