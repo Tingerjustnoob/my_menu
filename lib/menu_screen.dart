@@ -48,13 +48,15 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       eggPrice: eggPrice,
       cheesePrice: cheesePrice,
       chooseBread: category == '經典麵包系列',
+      drinks: category == '套餐系列' ? MenuData.categories['飲料系列'] : null,
     );
     if (!mounted || selection == null) return;
-    final name = '${item['name']}${selection.bread == null ? '' : '（${selection.bread}）'}';
+    final name = '${item['name']}${selection.bread == null ? '' : '（${selection.bread}）'}${selection.drink == null ? '' : '（${selection.drink}）'}';
     final price =
         (item['price'] as int) +
         (selection.addEgg ? eggPrice! : 0) +
-        (selection.addCheese ? cheesePrice! : 0);
+        (selection.addCheese ? cheesePrice! : 0) +
+        selection.drinkCharge;
     setState(() {
       final index = _cart.indexWhere(
         (entry) =>

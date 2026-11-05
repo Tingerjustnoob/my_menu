@@ -94,12 +94,19 @@ void main() {
       find.descendant(of: find.byType(Dialog), matching: find.text(r'$65')),
       findsOneWidget,
     );
+    expect(find.text('內容物：\n• 小雞塊\n• 薯條\n• 雞堡熱狗'), findsOneWidget);
   });
 
   testWidgets('加入購物車後可調整數量並查看明細', (tester) async {
     await openMenu(tester);
     await tester.tap(find.textContaining('兒童套餐 A').first);
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('請選擇飲料'));
+    await tester.tap(find.text('請選擇飲料'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('紅茶（中杯）（+\$0）').last);
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('加入購物車'));
     await tester.tap(find.text('加入購物車'));
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.shopping_cart_outlined));

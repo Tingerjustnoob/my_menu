@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 
-Future<({bool addEgg, bool addCheese, String? bread})?> showCustomDialog(
+Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge})?> showCustomDialog(
   BuildContext context,
   Map<String, dynamic> item, {
   int? eggPrice,
   int? cheesePrice,
   bool chooseBread = false,
+  List<Map<String, dynamic>>? drinks,
 }) {
   bool addEgg = false;
   bool addCheese = false;
   String? bread;
-  return showDialog<({bool addEgg, bool addCheese, String? bread})>(
+  Map<String, dynamic>? drink;
+  int drinkCharge() {
+    if (drink == null) return 0;
+    final name = drink!['name'] as String;
+    if (name == '紅茶（中杯）' || name == '奶茶（中杯）') return 0;
+    return (drink!['price'] as int) - 5;
+  }
+  return showDialog<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCharge})>(
     context: context,
     builder: (BuildContext context) {
       return StatefulBuilder(
@@ -55,7 +63,7 @@ Future<({bool addEgg, bool addCheese, String? bread})?> showCustomDialog(
                         ),
                         const SizedBox(width: 16),
                         Text(
-                          '\$${(item['price'] as int) + (addEgg ? eggPrice! : 0) + (addCheese ? cheesePrice! : 0)}',
+                          '\$${(item['price'] as int) + (addEgg ? eggPrice! : 0) + (addCheese ? cheesePrice! : 0) + drinkCharge()}',
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -63,6 +71,33 @@ Future<({bool addEgg, bool addCheese, String? bread})?> showCustomDialog(
                         ),
                       ],
                     ),
+                    if (item['description'] case final String description) ...[
+                      const SizedBox(height: 12),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '內容物：\n• ${description.replaceAll(RegExp(r'[+＋]'), '\n• ')}',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                    ],
+                    if (drinks != null) ...[
+                      const SizedBox(height: 12),
+                      DropdownButtonFormField<Map<String, dynamic>>(
+                        isExpanded: true,
+                        decoration: const InputDecoration(labelText: '請選擇飲料'),
+                        items: drinks.map((option) {
+                          final name = option['name'] as String;
+                          final charge = name == '紅茶（中杯）' || name == '奶茶（中杯）'
+                              ? 0 : (option['price'] as int) - 5;
+                          return DropdownMenuItem(
+                            value: option,
+                            child: Text('$name（+\$$charge）'),
+                          );
+                        }).toList(),
+                        onChanged: (value) => setDialogState(() => drink = value),
+                      ),
+                    ],
                     if (chooseBread) ...[
                       const SizedBox(height: 12),
                       const Text('請選擇麵包種類'),
@@ -97,9 +132,9 @@ Future<({bool addEgg, bool addCheese, String? bread})?> showCustomDialog(
                       ),
                     const SizedBox(height: 16),
                     FilledButton.icon(
-                      onPressed: chooseBread && bread == null ? null : () =>
+                      onPressed: (chooseBread && bread == null) || (drinks != null && drink == null) ? null : () =>
                           Navigator.of(context)
-                              .pop((addEgg: addEgg, addCheese: addCheese, bread: bread)),
+                              .pop((addEgg: addEgg, addCheese: addCheese, bread: bread, drink: drink?['name'] as String?, drinkCharge: drinkCharge())),
                       icon: const Icon(Icons.add_shopping_cart),
                       label: const Text('加入購物車'),
                     ),
