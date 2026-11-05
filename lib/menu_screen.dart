@@ -1,9 +1,20 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 
 import 'items_detail.dart';
 import 'cart_screen.dart';
 
 import 'items.dart';
+
+@JS('window.open')
+external JSAny? _openBrowserWindow(
+  JSString url,
+  JSString target,
+  JSString features,
+);
+
+const _address = '嘉義縣民雄鄉三興村大學路一段423號';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({
@@ -91,7 +102,56 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('麥香堡菜單'),
+        toolbarHeight: MediaQuery.sizeOf(context).width < 600 ? 120 : 64,
+        title: Row(
+          children: [
+            const Text('麥香堡'),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 16,
+                runSpacing: 4,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      const url =
+                          'https://www.google.com.tw/maps/place/'
+                          '%E9%BA%A5%E9%A6%99%E5%A0%A1/'
+                          '@23.5589065,120.4693861,20.83z/'
+                          'data=!4m6!3m5!1s0x346ebf52f6225ba1:0xf4c925ae58323615'
+                          '!8m2!3d23.5587745!4d120.4696578!16s%2Fg%2F11tbk35z4c'
+                          '?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D';
+                      _openBrowserWindow(
+                        url.toJS,
+                        '_blank'.toJS,
+                        'noopener,noreferrer'.toJS,
+                      );
+                    },
+                    child: Text(
+                      '地址：$_address',
+                      style: Theme.of(context).textTheme.bodyMedium
+                          ?.copyWith(decoration: TextDecoration.underline),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => _openBrowserWindow(
+                      'tel:052723486'.toJS,
+                      '_self'.toJS,
+                      ''.toJS,
+                    ),
+                    child: Text(
+                      '電話：05-272-3486',
+                      style: Theme.of(context).textTheme.bodyMedium
+                          ?.copyWith(decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: _openCart,
@@ -131,95 +191,85 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('地址：嘉義縣民雄鄉三興村大學路一段423號',
-                    style: Theme.of(context).textTheme.bodyMedium),
-                const SizedBox(height: 4),
-                Text('電話：05-272-3486',
-                    style: Theme.of(context).textTheme.bodyMedium),
-              ],
-            ),
-          ),
           TabBar(
             controller: _tabController,
             isScrollable: true,
             tabs: _tabs.map((category) => Tab(text: category)).toList(),
           ),
-          Expanded(child: TabBarView(
-        controller: _tabController,
-        children: _tabs.map((category) {
-          final items = MenuData.categories[category] ?? [];
-          final note = MenuData.categoryNotes[category];
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: _tabs.map((category) {
+                final items = MenuData.categories[category] ?? [];
+                final note = MenuData.categoryNotes[category];
 
-          if (items.isEmpty) {
-            return const Center(child: Text('目前沒有品項'));
-          }
+                if (items.isEmpty) {
+                  return const Center(child: Text('目前沒有品項'));
+                }
 
-          return ListView.builder(
-            itemCount: items.length + (note == null ? 0 : 1),
-            itemBuilder: (context, index) {
-              if (note != null && index == 0) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                  child: Text(
-                    '備註：$note',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                );
-              }
-              final item = items[index - (note == null ? 0 : 1)];
-
-              return InkWell(
-                onTap: () => _addToCart(item, category),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 12.0,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center, // 讓內容垂直居中對齊
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          item['image'],
-                          width: 150,
-                          height: 150,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-
-                      Expanded(
+                return ListView.builder(
+                  itemCount: items.length + (note == null ? 0 : 1),
+                  itemBuilder: (context, index) {
+                    if (note != null && index == 0) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                         child: Text(
-                          item['name'],
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          '備註：$note',
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                      ),
-                      const SizedBox(width: 16),
+                      );
+                    }
+                    final item = items[index - (note == null ? 0 : 1)];
 
-                      Text(
-                        '\$${item['price']}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    return InkWell(
+                      onTap: () => _addToCart(item, category),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 12.0,
+                        ),
+                        child: Row(
+                          crossAxisAlignment:
+                              CrossAxisAlignment.center, // 讓內容垂直居中對齊
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                item['image'],
+                                width: 150,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+
+                            Expanded(
+                              child: Text(
+                                item['name'],
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+
+                            Text(
+                              '\$${item['price']}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        }).toList(),
-          )),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+          ),
         ],
       ),
     );
