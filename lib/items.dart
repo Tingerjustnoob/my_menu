@@ -132,11 +132,6 @@ class MenuData {
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '鮪魚蛋餅',
-        'price': 40,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
         'name': '薯餅蛋餅',
         'price': 45,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',

@@ -20,7 +20,6 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    // 2. 直接從 MenuData 類別讀取分類的 Key 清單
     _tabs = MenuData.categories.keys.toList(); 
     _tabController = TabController(length: _tabs.length, vsync: this);
   }
@@ -57,10 +56,8 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: _tabs.map((category) {
-          // 3. 根據目前的分類，從 MenuData 抓取對應的餐點清單
           final items = MenuData.categories[category] ?? [];
           final note = MenuData.categoryNotes[category];
-          imageCache.clear(); // 清除圖片快取，避免重複加載舊圖片
 
           if (items.isEmpty) {
             return const Center(child: Text('目前沒有品項'));
@@ -80,18 +77,15 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
               }
               final item = items[index - (note == null ? 0 : 1)];
               
-              // 💡 改用 InkWell + Padding 取代 ListTile，圖片大、排版更自由
               return InkWell(
                 onTap: () {
                     showCustomDialog(context, item);
-                  // 點擊項目的事件（可留空）
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center, // 讓內容垂直居中對齊
                     children: [
-                      // 2. 放大後的餐點圖片（加上精緻圓角）
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
@@ -115,7 +109,6 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                       ),
                       const SizedBox(width: 16),
                       
-                      // 4. 右側價格
                       Text(
                         '\$${item['price']}',
                         style: const TextStyle(
