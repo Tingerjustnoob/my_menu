@@ -3,9 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('顯示菜單標題與套餐分類', (tester) async {
+  Future<void> openMenu(WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
-    expect(find.text('麥香堡菜單'), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text('訂餐方式說明'), findsOneWidget);
+    expect(find.textContaining('無法線上結帳或送出訂單'), findsOneWidget);
+    await tester.tap(find.text('我知道了'));
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('顯示菜單標題與套餐分類', (tester) async {
+    await openMenu(tester);
+    expect(find.text('麥香堡'), findsOneWidget);
     expect(find.text('套餐系列'), findsOneWidget);
     expect(find.text('備註：套餐均附中杯飲料，飲料另選折抵 5 元。'), findsOneWidget);
     await tester.tap(find.text('中式餐點'));
@@ -16,7 +25,7 @@ void main() {
   testWidgets('可跟隨系統並手動切換淺色與深色模式', (tester) async {
     tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
     addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
-    await tester.pumpWidget(const MyApp());
+    await openMenu(tester);
     expect(
       Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
       Brightness.dark,
@@ -69,7 +78,7 @@ void main() {
   });
 
   testWidgets('點擊餐點後顯示詳情', (tester) async {
-    await tester.pumpWidget(const MyApp());
+    await openMenu(tester);
     await tester.tap(find.textContaining('兒童套餐 A').first);
     await tester.pumpAndSettle();
 
@@ -88,7 +97,7 @@ void main() {
   });
 
   testWidgets('加入購物車後可調整數量並查看明細', (tester) async {
-    await tester.pumpWidget(const MyApp());
+    await openMenu(tester);
     await tester.tap(find.textContaining('兒童套餐 A').first);
     await tester.pumpAndSettle();
     await tester.tap(find.text('加入購物車'));
@@ -115,7 +124,7 @@ void main() {
   });
 
   testWidgets('加蛋餐點的價格會計入購物車', (tester) async {
-    await tester.pumpWidget(const MyApp());
+    await openMenu(tester);
     await tester.tap(find.text('中式餐點'));
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(
@@ -143,7 +152,7 @@ void main() {
   });
 
   testWidgets('麵包餐點可同時加蛋及芝士，並記錄在明細', (tester) async {
-    await tester.pumpWidget(const MyApp());
+    await openMenu(tester);
     await tester.tap(find.text('經典麵包系列'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('鮮蔬歐式招牌堡/丹麥漢堡'));

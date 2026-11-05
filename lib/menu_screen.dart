@@ -90,6 +90,25 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
     super.initState();
     _tabs = MenuData.categories.keys.toList();
     _tabController = TabController(length: _tabs.length, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('訂餐方式說明'),
+          content: const Text(
+            '您可以將想吃的餐點加入購物車，查看餐點明細與總金額。'
+            '本網站無法線上結帳或送出訂單，請撥打 05-272-3486 電話訂餐。',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('我知道了'),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   @override
