@@ -7,7 +7,7 @@ class MenuData {
     '經典麵包系列': '加蛋或加芝士另加 10 元。',
     '貝果系列': '加蛋或加芝士另加 10 元。',
     '捲餅系列': '加蛋或加芝士另加 10 元。',
-    '漢堡/湯種土司系列': '加蛋或加芝士另加 10 元。',
+    '漢堡／湯種吐司系列': '加蛋或加芝士另加 10 元。',
     '蔬菜沙拉系列': '和風醬/千島醬/優格醬/蜂蜜芥末醬(任選)',
   };
 
@@ -37,7 +37,7 @@ class MenuData {
       {
         'name': '千層蛋燒套餐：千層蛋燒(香濃起司、玉米、蛋)＋蔬菜沙拉',
         'price': 90,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/千層蛋燒套餐.png',
       },
       {
         'name': '法式套餐：法式麵包抹蒜香＋蔬菜沙拉＋培根＋薯餅＋蛋',
@@ -160,7 +160,7 @@ class MenuData {
       {
         'name': '湯種法國吐司',
         'price': 35,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/湯種法國吐司.png',
       },
       {
         'name': '蘿蔔糕',
@@ -175,7 +175,7 @@ class MenuData {
       {
         'name': '鐵板麵（蘑菇/黑胡椒）',
         'price': 35,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/鐵板麵.png',
       },
       {
         'name': '荷包蛋（全熟/半熟）',
@@ -349,7 +349,7 @@ class MenuData {
       {
         'name': '青醬燻雞義大利麵',
         'price': 90,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/青醬雞肉義大利麵.png',
       },
       {
         'name': '燉飯（茄汁/奶油/青醬）',
@@ -426,7 +426,7 @@ class MenuData {
       {
         'name': '薯餅吐司/漢堡',
         'price': 30,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
+        'image': 'web/icons/item_img/薯餅蛋吐司.png',
       },
       {
         'name': '歐姆蛋吐司/漢堡',
