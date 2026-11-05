@@ -6,7 +6,7 @@ void main() {
   testWidgets('顯示菜單標題與套餐分類', (tester) async {
     await tester.pumpWidget(const MyApp());
     expect(find.text('麥香堡菜單'), findsOneWidget);
-    expect(find.text('套餐'), findsOneWidget);
+    expect(find.text('套餐系列'), findsOneWidget);
   });
 
   testWidgets('可以切換明亮與夜間模式', (tester) async {

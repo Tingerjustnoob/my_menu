@@ -3,7 +3,7 @@
 class MenuData {
   // 將餐點資料宣告為 static final，讓其他檔案可以直接讀取，不需重複實例化
   static final Map<String, List<Map<String, dynamic>>> categories = {
-    '套餐': [
+    '套餐系列': [
       //
       {
         'name': '兒童套餐 A：小雞塊+薯條＋雞堡熱狗',
@@ -643,7 +643,7 @@ class MenuData {
         'width': 100,
       },
     ],
-    '烤吐司系列': [
+    '烤土司系列': [
       {
         'name': '草莓薄片',
         'price': 15,
