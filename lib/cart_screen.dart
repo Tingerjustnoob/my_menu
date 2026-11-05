@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'store_contact.dart';
+
 class CartItem {
   CartItem({
     required this.name,
@@ -134,12 +136,18 @@ class OrderSummaryScreen extends StatelessWidget {
           for (final line in lines)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(line),
+              child: Text(line, style: Theme.of(context).textTheme.titleLarge),
             ),
           const Divider(),
           Text('總金額：\$$total', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 16),
           const Text('此畫面僅供確認，不會付款或送出訂單。'),
+          const SizedBox(height: 16),
+          FilledButton.icon(
+            onPressed: callStore,
+            icon: const Icon(Icons.phone),
+            label: const Text('打電話訂餐'),
+          ),
         ],
       ),
     );

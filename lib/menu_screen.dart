@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'items_detail.dart';
 import 'cart_screen.dart';
+import 'store_contact.dart';
 
 import 'items.dart';
 
@@ -146,13 +147,9 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
           ),
         ),
         InkWell(
-          onTap: () => _openBrowserWindow(
-            'tel:052723486'.toJS,
-            '_self'.toJS,
-            ''.toJS,
-          ),
+          onTap: callStore,
           child: Text(
-            '電話：05-272-3486',
+            '電話：$storePhone',
             style: Theme.of(context).textTheme.bodyMedium
                 ?.copyWith(decoration: TextDecoration.underline),
           ),

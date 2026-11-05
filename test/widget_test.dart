@@ -113,6 +113,7 @@ void main() {
     expect(find.text('餐點明細'), findsOneWidget);
     expect(find.text('總金額：\$130'), findsOneWidget);
     expect(find.text('此畫面僅供確認，不會付款或送出訂單。'), findsOneWidget);
+    expect(find.text('打電話訂餐'), findsOneWidget);
     await tester.pageBack();
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.remove_circle_outline));
