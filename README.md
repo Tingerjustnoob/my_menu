@@ -1,10 +1,8 @@
 # E_Commerce
 
-This project is our E_Commerce in-class project.  
+This project is our E_Commerce in-class project.
 
 店家:[麥香堡](https://www.google.com.tw/maps/place/%E9%BA%A5%E9%A6%99%E5%A0%A1/@23.5587745,120.4696578,17z/data=!3m1!4b1!4m6!3m5!1s0x346ebf52f6225ba1:0xf4c925ae58323615!8m2!3d23.5587745!4d120.4696578!16s%2Fg%2F11tbk35z4c?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D)
-
-
 
 使用 Flutter 製作的早餐店電子菜單。
 
@@ -34,4 +32,10 @@ This project is our E_Commerce in-class project.
 ```powershell
 flutter pub get
 flutter run -d chrome
+```
+
+## 測試
+
+```powershell
+flutter test
 ```
