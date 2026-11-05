@@ -30,7 +30,6 @@ This project is our E_Commerce in-class project.
 先確認已安裝 Flutter，接著在專案資料夾開啟終端機：
 
 ```powershell
-flutter pub get
 flutter run -d chrome
 ```
 

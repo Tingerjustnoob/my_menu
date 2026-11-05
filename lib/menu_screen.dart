@@ -127,16 +127,29 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
             ],
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
-          child: TabBar(
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('地址：嘉義縣民雄鄉三興村大學路一段423號',
+                    style: Theme.of(context).textTheme.bodyMedium),
+                const SizedBox(height: 4),
+                Text('電話：05-272-3486',
+                    style: Theme.of(context).textTheme.bodyMedium),
+              ],
+            ),
+          ),
+          TabBar(
             controller: _tabController,
             isScrollable: true,
             tabs: _tabs.map((category) => Tab(text: category)).toList(),
           ),
-        ),
-      ),
-      body: TabBarView(
+          Expanded(child: TabBarView(
         controller: _tabController,
         children: _tabs.map((category) {
           final items = MenuData.categories[category] ?? [];
@@ -206,6 +219,8 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
             },
           );
         }).toList(),
+          )),
+        ],
       ),
     );
   }
