@@ -34,7 +34,16 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('購物車')),
+      appBar: AppBar(
+        title: const Text('購物車'),
+        actions: [
+          IconButton(
+            tooltip: '關閉購物車',
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.close),
+          ),
+        ],
+      ),
       body: widget.items.isEmpty
           ? const Center(child: Text('購物車目前沒有餐點'))
           : Column(
