@@ -8,12 +8,12 @@ import 'items.dart';
 class MenuScreen extends StatefulWidget {
   const MenuScreen({
     super.key,
-    required this.isDarkMode,
-    required this.onToggleTheme,
+    required this.themeMode,
+    required this.onThemeModeChanged,
   });
 
-  final bool isDarkMode;
-  final VoidCallback onToggleTheme;
+  final ThemeMode themeMode;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
   State<MenuScreen> createState() => _MenuScreenState();
@@ -99,10 +99,32 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                 '購物車（${_cart.fold<int>(0, (sum, item) => sum + item.quantity)} 件）',
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
-          IconButton(
-            onPressed: widget.onToggleTheme,
-            tooltip: widget.isDarkMode ? '切換明亮模式' : '切換夜間模式',
-            icon: Icon(widget.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+          PopupMenuButton<ThemeMode>(
+            tooltip: '選擇顯示模式',
+            initialValue: widget.themeMode,
+            onSelected: widget.onThemeModeChanged,
+            icon: Icon(
+              Theme.of(context).brightness == Brightness.dark
+                  ? Icons.dark_mode
+                  : Icons.light_mode,
+            ),
+            itemBuilder: (context) => [
+              CheckedPopupMenuItem(
+                value: ThemeMode.system,
+                checked: widget.themeMode == ThemeMode.system,
+                child: const Text('跟隨系統'),
+              ),
+              CheckedPopupMenuItem(
+                value: ThemeMode.light,
+                checked: widget.themeMode == ThemeMode.light,
+                child: const Text('淺色模式'),
+              ),
+              CheckedPopupMenuItem(
+                value: ThemeMode.dark,
+                checked: widget.themeMode == ThemeMode.dark,
+                child: const Text('深色模式'),
+              ),
+            ],
           ),
         ],
         bottom: PreferredSize(

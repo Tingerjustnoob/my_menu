@@ -13,19 +13,55 @@ void main() {
     expect(find.textContaining('備註：'), findsNothing);
   });
 
-  testWidgets('可以切換明亮與夜間模式', (tester) async {
+  testWidgets('可跟隨系統並手動切換淺色與深色模式', (tester) async {
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
     await tester.pumpWidget(const MyApp());
-    await tester.tap(find.byTooltip('切換夜間模式'));
-    await tester.pumpAndSettle();
-    expect(find.byTooltip('切換明亮模式'), findsOneWidget);
     expect(
       Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
       Brightness.dark,
     );
-
-    await tester.tap(find.byTooltip('切換明亮模式'));
+    await tester.tap(find.byTooltip('選擇顯示模式'));
     await tester.pumpAndSettle();
-    expect(find.byTooltip('切換夜間模式'), findsOneWidget);
+    await tester.tap(
+      find.ancestor(
+        of: find.text('淺色模式'),
+        matching: find.byType(CheckedPopupMenuItem<ThemeMode>),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+      Brightness.light,
+    );
+    await tester.tap(find.byTooltip('選擇顯示模式'));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.ancestor(
+        of: find.text('深色模式'),
+        matching: find.byType(CheckedPopupMenuItem<ThemeMode>),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+      Brightness.dark,
+    );
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+    await tester.pumpAndSettle();
+    expect(
+      Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+      Brightness.dark,
+    );
+    await tester.tap(find.byTooltip('選擇顯示模式'));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.ancestor(
+        of: find.text('跟隨系統'),
+        matching: find.byType(CheckedPopupMenuItem<ThemeMode>),
+      ),
+    );
+    await tester.pumpAndSettle();
     expect(
       Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
       Brightness.light,

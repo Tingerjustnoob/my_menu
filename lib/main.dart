@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'menu_screen.dart';
 
 void main() {
@@ -13,10 +14,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isDarkMode = false;
+  ThemeMode _themeMode = ThemeMode.system;
 
-  void _toggleTheme() {
-    setState(() => _isDarkMode = !_isDarkMode);
+  void _setThemeMode(ThemeMode mode) {
+    setState(() => _themeMode = mode);
   }
 
   @override
@@ -32,8 +33,15 @@ class _MyAppState extends State<MyApp> {
           outline: Color(0xFF806E64),
         ),
         scaffoldBackgroundColor: const Color(0xFFFFFBF5),
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFFFFBF5), foregroundColor: Color(0xFF261B16), surfaceTintColor: Colors.transparent),
-        dialogTheme: const DialogThemeData(backgroundColor: Colors.white, surfaceTintColor: Colors.transparent),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFFFBF5),
+          foregroundColor: Color(0xFF261B16),
+          surfaceTintColor: Colors.transparent,
+        ),
+        dialogTheme: const DialogThemeData(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+        ),
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
@@ -45,16 +53,26 @@ class _MyAppState extends State<MyApp> {
           outline: Color(0xFFB6A39A),
         ),
         scaffoldBackgroundColor: const Color(0xFF1C1917),
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1C1917), foregroundColor: Color(0xFFF6EDE6), surfaceTintColor: Colors.transparent),
-        dialogTheme: const DialogThemeData(backgroundColor: Color(0xFF302824), surfaceTintColor: Colors.transparent),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF1C1917),
+          foregroundColor: Color(0xFFF6EDE6),
+          surfaceTintColor: Colors.transparent,
+        ),
+        dialogTheme: const DialogThemeData(
+          backgroundColor: Color(0xFF302824),
+          surfaceTintColor: Colors.transparent,
+        ),
         useMaterial3: true,
       ),
-      themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: MenuScreen(isDarkMode: _isDarkMode, onToggleTheme: _toggleTheme),
+      themeMode: _themeMode,
+      home: MenuScreen(
+        themeMode: _themeMode,
+        onThemeModeChanged: _setThemeMode,
+      ),
       routes: {
         '/home': (context) => MenuScreen(
-          isDarkMode: _isDarkMode,
-          onToggleTheme: _toggleTheme,
+          themeMode: _themeMode,
+          onThemeModeChanged: _setThemeMode,
         ),
       },
     );
