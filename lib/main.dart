@@ -24,6 +24,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '餐品介紹',
+      builder: (context, child) {
+        final media = MediaQuery.of(context);
+        return MediaQuery(
+          data: media.copyWith(textScaler: _LargerTextScaler(media.textScaler)),
+          child: child!,
+        );
+      },
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
           primary: Color(0xFF8B321A),
@@ -77,4 +84,16 @@ class _MyAppState extends State<MyApp> {
       },
     );
   }
+}
+
+class _LargerTextScaler extends TextScaler {
+  const _LargerTextScaler(this.base);
+
+  final TextScaler base;
+
+  @override
+  double scale(double fontSize) => base.scale(fontSize * 1.1);
+
+  @override
+  double get textScaleFactor => scale(1);
 }

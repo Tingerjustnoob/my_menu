@@ -100,56 +100,56 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final isNarrow = MediaQuery.sizeOf(context).width < 600;
+    final contactInfo = Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 16,
+      runSpacing: 4,
+      children: [
+        InkWell(
+          onTap: () {
+            const url =
+                'https://www.google.com.tw/maps/place/'
+                '%E9%BA%A5%E9%A6%99%E5%A0%A1/'
+                '@23.5589065,120.4693861,20.83z/'
+                'data=!4m6!3m5!1s0x346ebf52f6225ba1:0xf4c925ae58323615'
+                '!8m2!3d23.5587745!4d120.4696578!16s%2Fg%2F11tbk35z4c'
+                '?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D';
+            _openBrowserWindow(url.toJS, '_blank'.toJS, 'noopener,noreferrer'.toJS);
+          },
+          child: Text(
+            '地址：$_address',
+            softWrap: true,
+            overflow: TextOverflow.visible,
+            style: Theme.of(context).textTheme.bodyMedium
+                ?.copyWith(decoration: TextDecoration.underline),
+          ),
+        ),
+        InkWell(
+          onTap: () => _openBrowserWindow(
+            'tel:052723486'.toJS,
+            '_self'.toJS,
+            ''.toJS,
+          ),
+          child: Text(
+            '電話：05-272-3486',
+            style: Theme.of(context).textTheme.bodyMedium
+                ?.copyWith(decoration: TextDecoration.underline),
+          ),
+        ),
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: MediaQuery.sizeOf(context).width < 600 ? 120 : 64,
+        toolbarHeight: isNarrow
+            ? MediaQuery.textScalerOf(context).scale(145)
+            : 64,
         title: Row(
           children: [
             const Text('麥香堡'),
             const SizedBox(width: 16),
-            Expanded(
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 16,
-                runSpacing: 4,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      const url =
-                          'https://www.google.com.tw/maps/place/'
-                          '%E9%BA%A5%E9%A6%99%E5%A0%A1/'
-                          '@23.5589065,120.4693861,20.83z/'
-                          'data=!4m6!3m5!1s0x346ebf52f6225ba1:0xf4c925ae58323615'
-                          '!8m2!3d23.5587745!4d120.4696578!16s%2Fg%2F11tbk35z4c'
-                          '?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D';
-                      _openBrowserWindow(
-                        url.toJS,
-                        '_blank'.toJS,
-                        'noopener,noreferrer'.toJS,
-                      );
-                    },
-                    child: Text(
-                      '地址：$_address',
-                      style: Theme.of(context).textTheme.bodyMedium
-                          ?.copyWith(decoration: TextDecoration.underline),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => _openBrowserWindow(
-                      'tel:052723486'.toJS,
-                      '_self'.toJS,
-                      ''.toJS,
-                    ),
-                    child: Text(
-                      '電話：05-272-3486',
-                      style: Theme.of(context).textTheme.bodyMedium
-                          ?.copyWith(decoration: TextDecoration.underline),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            Expanded(child: contactInfo),
           ],
         ),
         actions: [
@@ -194,6 +194,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
           TabBar(
             controller: _tabController,
             isScrollable: true,
+            tabAlignment: TabAlignment.start,
             tabs: _tabs.map((category) => Tab(text: category)).toList(),
           ),
           Expanded(
