@@ -76,12 +76,6 @@ class _MyAppState extends State<MyApp> {
         themeMode: _themeMode,
         onThemeModeChanged: _setThemeMode,
       ),
-      routes: {
-        '/home': (context) => MenuScreen(
-          themeMode: _themeMode,
-          onThemeModeChanged: _setThemeMode,
-        ),
-      },
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 
 import 'items_detail.dart';
@@ -7,13 +5,6 @@ import 'cart_screen.dart';
 import 'store_contact.dart';
 
 import 'items.dart';
-
-@JS('window.open')
-external JSAny? _openBrowserWindow(
-  JSString url,
-  JSString target,
-  JSString features,
-);
 
 const _address = '嘉義縣民雄鄉三興村大學路一段423號';
 
@@ -167,11 +158,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                 'data=!4m6!3m5!1s0x346ebf52f6225ba1:0xf4c925ae58323615'
                 '!8m2!3d23.5587745!4d120.4696578!16s%2Fg%2F11tbk35z4c'
                 '?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D';
-            _openBrowserWindow(
-              url.toJS,
-              '_blank'.toJS,
-              'noopener,noreferrer'.toJS,
-            );
+            openMap(url);
           },
           child: Text(
             '地址：$_address',

@@ -58,12 +58,13 @@ showCustomDialog(
     );
   }
 
-  int drinkCharge() {
-    if (drink == null) return 0;
-    final name = drink!['name'] as String;
+  int chargeForDrink(Map<String, dynamic> selectedDrink) {
+    final name = selectedDrink['name'] as String;
     if (name == '紅茶（中杯）' || name == '奶茶（中杯）') return 0;
-    return (drink!['price'] as int) - 5;
+    return (selectedDrink['price'] as int) - 5;
   }
+
+  int drinkCharge() => drink == null ? 0 : chargeForDrink(drink!);
 
   return showDialog<
     ({
@@ -146,9 +147,7 @@ showCustomDialog(
                         decoration: const InputDecoration(labelText: '請選擇飲料'),
                         items: drinks.map((option) {
                           final name = option['name'] as String;
-                          final charge = name == '紅茶（中杯）' || name == '奶茶（中杯）'
-                              ? 0
-                              : (option['price'] as int) - 5;
+                          final charge = chargeForDrink(option);
                           return DropdownMenuItem(
                             value: option,
                             child: Text('$name（+\$$charge）'),

@@ -19,14 +19,11 @@ run.txt
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
+# Local VS Code settings
 .vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins-dependencies
 .pub-cache/
@@ -40,25 +37,13 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
 # Widget Preview related
 .widget_preview/
 
-# Local caches left by platforms removed from this web-only project
-/android/.gradle/
-/android/local.properties
-/android/app/src/main/java/io/flutter/plugins/
-/ios/Flutter/Generated.xcconfig
-/ios/Flutter/ephemeral/
-/ios/Flutter/flutter_export_environment.sh
-/ios/Runner/GeneratedPluginRegistrant.h
-/ios/Runner/GeneratedPluginRegistrant.m
-/macos/Flutter/ephemeral/
-/macos/Flutter/GeneratedPluginRegistrant.swift
+# Local files from platforms not used by this web-only project
+/android/
+/ios/
+/macos/
 
 # Generated Flutter web build files mistakenly placed in the source directory
 /web/.last_build_id
