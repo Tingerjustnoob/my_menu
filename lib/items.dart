@@ -2,8 +2,7 @@
 
 class MenuData {
   static const Set<String> eggAndCheeseCategories = {
-    '經典麵包系列',
-    '貝果系列',
+    '經典麵包／貝果',
     '捲餅系列',
     '漢堡／湯種吐司系列',
   };
@@ -11,8 +10,7 @@ class MenuData {
   static const Map<String, String> categoryNotes = {
     '套餐系列': '套餐均附中杯飲料，飲料另選折抵 5 元。',
     '早午餐系列': '早午餐均附中杯飲料，飲料另選折抵 5 元。',
-    '經典麵包系列': '加蛋或加芝士另加 10 元。',
-    '貝果系列': '加蛋或加芝士另加 10 元。',
+    '經典麵包／貝果系列': '加蛋或加芝士另加 10 元。',
     '捲餅系列': '加蛋或加芝士另加 10 元。',
     '漢堡／湯種吐司系列': '加蛋或加芝士另加 10 元。',
     '蔬菜沙拉系列': '和風醬/千島醬/優格醬/蜂蜜芥末醬(任選)',
@@ -221,7 +219,7 @@ class MenuData {
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
     ],
-    '經典麵包系列': [
+    '經典麵包／貝果系列': [
       {
         'name': '鮮蔬',
         'price': 40,
@@ -256,65 +254,20 @@ class MenuData {
       },
       {
         'name': '香烤雞腿',
-        'price': 55,
+        'price': 60,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
-        'name': '卡啦雞腿（原/辣）',
-        'price': 60,
+        'name': '卡啦雞腿',
+        'price': 65,
+        'optionLabel': '請選擇口味',
+        'options': ['原味', '辣味'],
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
       {
         'name': '超厚牛肉芝士',
         'price': 80,
         'noExtraCheese': true,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-    ],
-    '貝果系列': [
-      {
-        'name': '鮮蔬貝果/丹麥堡',
-        'price': 40,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '歐姆蛋貝果/丹麥堡',
-        'price': 45,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '鮪魚貝果/丹麥堡',
-        'price': 45,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '檸檬雞貝果/丹麥堡',
-        'price': 50,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '燻雞貝果/丹麥堡',
-        'price': 50,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '培根芝士貝果/丹麥堡',
-        'price': 55,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '香烤雞腿貝果/丹麥堡',
-        'price': 55,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '卡啦雞腿（原/辣）貝果/丹麥堡',
-        'price': 60,
-        'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
-      },
-      {
-        'name': '超厚牛肉芝士貝果/丹麥堡',
-        'price': 80,
         'image': 'web/icons/item_img/Pork_and_Eggs_with_salad_hamburger.jpg',
       },
     ],

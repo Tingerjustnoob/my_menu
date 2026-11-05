@@ -5,7 +5,7 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
   Map<String, dynamic> item, {
   int? eggPrice,
   int? cheesePrice,
-  bool chooseBread = false,
+  List<String>? breadOptions,
   List<Map<String, dynamic>>? drinks,
 }) {
   bool addEgg = false;
@@ -100,12 +100,12 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                         onChanged: (value) => setDialogState(() => drink = value),
                       ),
                     ],
-                    if (chooseBread) ...[
+                    if (breadOptions != null) ...[
                       const SizedBox(height: 12),
                       const Text('請選擇麵包種類'),
                       Wrap(
                         spacing: 8,
-                        children: ['丹麥麵包', '歐式招牌堡'].map((option) {
+                        children: breadOptions.map((option) {
                           return ChoiceChip(
                             label: Text(option),
                             selected: bread == option,
@@ -146,7 +146,7 @@ Future<({bool addEgg, bool addCheese, String? bread, String? drink, int drinkCha
                       ),
                     const SizedBox(height: 16),
                     FilledButton.icon(
-                      onPressed: (chooseBread && bread == null) || (drinks != null && drink == null) || (options != null && selectedOption == null) ? null : () =>
+                      onPressed: (breadOptions != null && bread == null) || (drinks != null && drink == null) || (options != null && selectedOption == null) ? null : () =>
                           Navigator.of(context)
                               .pop((addEgg: addEgg, addCheese: addCheese, bread: bread, drink: drink?['name'] as String?, drinkCharge: drinkCharge(), option: selectedOption)),
                       icon: const Icon(Icons.add_shopping_cart),

@@ -47,7 +47,10 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
       item,
       eggPrice: eggPrice,
       cheesePrice: cheesePrice,
-      chooseBread: category == '經典麵包系列',
+      breadOptions: switch (category) {
+        '經典麵包／貝果系列' => ['歐式招牌堡', '丹麥漢堡', '貝果'],
+        _ => null,
+      },
       drinks: category == '套餐系列' ? MenuData.categories['飲料系列'] : null,
     );
     if (!mounted || selection == null) return;

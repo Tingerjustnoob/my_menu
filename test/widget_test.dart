@@ -161,12 +161,12 @@ void main() {
 
   testWidgets('麵包餐點可同時加蛋及芝士，並記錄在明細', (tester) async {
     await openMenu(tester);
-    await tester.tap(find.text('經典麵包系列'));
+    await tester.tap(find.text('經典麵包／貝果系列'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('鮮蔬'));
     await tester.pumpAndSettle();
     expect(find.text('請選擇麵包種類'), findsOneWidget);
-    await tester.tap(find.text('丹麥麵包'));
+    await tester.tap(find.text('丹麥漢堡'));
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('加蛋 (+\$10)'));
     await tester.tap(find.text('加蛋 (+\$10)'));
@@ -178,7 +178,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.shopping_cart_outlined));
     await tester.pumpAndSettle();
-    expect(find.text('鮮蔬（丹麥麵包）'), findsOneWidget);
+    expect(find.text('鮮蔬（丹麥漢堡）'), findsOneWidget);
     expect(find.text('總金額：\$60'), findsOneWidget);
     expect(find.text('加蛋、加芝士・單價 \$60'), findsOneWidget);
     await tester.tap(find.text('查看餐點明細'));
