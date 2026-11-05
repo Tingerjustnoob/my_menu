@@ -48,6 +48,18 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 
+# Local caches left by platforms removed from this web-only project
+/android/.gradle/
+/android/local.properties
+/android/app/src/main/java/io/flutter/plugins/
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/ephemeral/
+/ios/Flutter/flutter_export_environment.sh
+/ios/Runner/GeneratedPluginRegistrant.h
+/ios/Runner/GeneratedPluginRegistrant.m
+/macos/Flutter/ephemeral/
+/macos/Flutter/GeneratedPluginRegistrant.swift
+
 # Generated Flutter web build files mistakenly placed in the source directory
 /web/.last_build_id
 /web/assets/
