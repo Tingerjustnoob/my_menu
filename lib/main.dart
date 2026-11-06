@@ -32,17 +32,23 @@ class _MyAppState extends State<MyApp> {
         );
       },
       theme: ThemeData(
-        colorScheme: const ColorScheme.light(
-          primary: Color(0xFF8B321A),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF0866FF),
+          brightness: Brightness.light,
+        ).copyWith(
+          primary: const Color(0xFF0860E8),
           onPrimary: Colors.white,
-          surface: Color(0xFFFFFBF5),
-          onSurface: Color(0xFF261B16),
-          outline: Color(0xFF806E64),
+          primaryContainer: const Color(0xFFDCEAFF),
+          onPrimaryContainer: const Color(0xFF003B91),
+          surface: Colors.white,
+          onSurface: const Color(0xFF050505),
+          onSurfaceVariant: const Color(0xFF4B4F56),
+          outline: const Color(0xFF73777F),
         ),
-        scaffoldBackgroundColor: const Color(0xFFFFFBF5),
+        scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFFFBF5),
-          foregroundColor: Color(0xFF261B16),
+          backgroundColor: Colors.white,
+          foregroundColor: Color(0xFF050505),
           surfaceTintColor: Colors.transparent,
         ),
         dialogTheme: const DialogThemeData(
@@ -52,21 +58,27 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFFFB69D),
-          onPrimary: Color(0xFF451400),
-          surface: Color(0xFF1C1917),
-          onSurface: Color(0xFFF6EDE6),
-          outline: Color(0xFFB6A39A),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF0866FF),
+          brightness: Brightness.dark,
+        ).copyWith(
+          primary: const Color(0xFF75B6FF),
+          onPrimary: const Color(0xFF002D62),
+          primaryContainer: const Color(0xFF164A80),
+          onPrimaryContainer: const Color(0xFFE5F1FF),
+          surface: const Color(0xFF242526),
+          onSurface: const Color(0xFFE4E6EB),
+          onSurfaceVariant: const Color(0xFFBEC3CC),
+          outline: const Color(0xFF9299A3),
         ),
-        scaffoldBackgroundColor: const Color(0xFF1C1917),
+        scaffoldBackgroundColor: const Color(0xFF18191A),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF1C1917),
-          foregroundColor: Color(0xFFF6EDE6),
+          backgroundColor: Color(0xFF242526),
+          foregroundColor: Color(0xFFE4E6EB),
           surfaceTintColor: Colors.transparent,
         ),
         dialogTheme: const DialogThemeData(
-          backgroundColor: Color(0xFF302824),
+          backgroundColor: Color(0xFF242526),
           surfaceTintColor: Colors.transparent,
         ),
         useMaterial3: true,
