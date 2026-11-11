@@ -1,0 +1,56 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+run.txt
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Local VS Code settings
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Widget Preview related
+.widget_preview/
+
+# Local files from platforms not used by this web-only project
+/android/
+/ios/
+/macos/
+
+# Generated Flutter web build files mistakenly placed in the source directory
+/web/.last_build_id
+/web/assets/
+/web/canvaskit/
+/web/main.dart.js
+/web/flutter.js
+/web/flutter_bootstrap.js
+/web/flutter_service_worker.js
+/web/version.json

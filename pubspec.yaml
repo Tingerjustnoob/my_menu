@@ -1,0 +1,27 @@
+name: e_commerce
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.0-227.0.dev
+
+dependencies:
+  flutter:
+    sdk: flutter
+  url_launcher: ^6.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - web/icons/Icon-192.png
+    - web/icons/item_img/
+
